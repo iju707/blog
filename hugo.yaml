@@ -1,0 +1,64 @@
+baseURL: https://blog.oofbird.me/
+languageCode: ko-kr
+title: OOFBIRD
+
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+googleAnalytics:
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+enableInlineShortcodes: true
+
+menu:
+  main:
+    - name: 문서번역
+      pageRef: /docs
+      weight: 1
+    - name: BLOG
+      pageRef: /blog
+      weight: 2
+    - name: Search
+      weight: 99
+      params:
+        type: search
+    - name: Github
+      weight: 100
+      url: "https://github.com/iju707"
+      params:
+        icon: github
+
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: logo.png
+      dark: logo.png
+      link: /
+      width: 40
+      height: 40
+  footer:
+    displayCopyright: true
+    displayPoweredBy: true
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+
+  search:
+    enable: true
+  editURL:
+    enable: true
+    base: "https://github.com/iju707/blog/edit/master/content"
+
+defaultContentLanguage: kr
+languages:
+  kr:
+    languageName: 한국어
+    weight: 1
