@@ -1,0 +1,11 @@
+{{ with .Description -}}
+  {{ . -}}
+{{ else -}}
+  {{ if .IsHome -}}
+    {{ with .Site.Params.description -}}
+      {{ . -}}
+    {{ end -}}
+  {{ else -}}
+    {{ .Summary | plainify | htmlUnescape | chomp -}}
+  {{ end -}}
+{{ end -}}
