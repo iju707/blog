@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 AWS PrivateLink 예제'
-linkTitle = "PrivateLink"
-draft = false
-weight = 10
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 AWS PrivateLink 예제
+linkTitle: PrivateLink
+draft: false
+weight: 10
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-privatelink.html
 

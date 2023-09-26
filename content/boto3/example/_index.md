@@ -1,7 +1,8 @@
-+++
-title = '코드 예제'
-draft = false
-+++
+---
+title: 코드 예제
+draft: false
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/examples.html
 

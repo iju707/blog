@@ -1,7 +1,8 @@
-+++
-title = 'REST API'
-draft = false
-+++
+---
+title: REST API
+draft: false
+date: 2023-09-20
+---
 
 엘라스틱서치는 UI 컴포넌트에서 사용하거나 직접 호출하여 엘라스틱서치의 기능을 구성하고 접근할 수 있는 REST API를 제공합니다.
 

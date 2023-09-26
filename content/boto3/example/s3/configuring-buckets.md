@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 버킷 CORS 구성 예제'
-linkTitle = "버킷 CORS 구성"
-draft = false
-weight = 9
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 버킷 CORS 구성 예제
+linkTitle: 버킷 CORS 구성
+draft: false
+weight: 9
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-configuring-buckets.html
 

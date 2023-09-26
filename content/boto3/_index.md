@@ -1,8 +1,10 @@
-+++
-title = 'Boto3 문서'
-draft = false
-linkTitle = "Boto3"
-+++
+---
+title: Boto3 문서
+draft: false
+linkTitle: Boto3
+type: docs
+---
+
 > https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 
 AWS SDK for Python (Boto3)를 활용해서 아마존 엘라스틱 컴퓨터 클라우드 (Amazon EC2)와 아마존 단순 저장소 서비스 (Amazon S3) 등과 같은 AWS 서비스를 생성하고 구성하고 관리할 수 있습니다.

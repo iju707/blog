@@ -1,10 +1,11 @@
-+++
-title = "Boto3를 활용한 Amazon S3 Bucket 예제"
-linkTitle = "Bucket 생성"
-draft = false
-weight = 1
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 Amazon S3 Bucket 예제
+linkTitle: Bucket 생성
+draft: false
+weight: 1
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-creating-buckets.html
 

@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 파일 업로드 예제'
-linkTitle = "파일 업로드"
-draft = false
-date = "2023-09-20"
-weight = 2
-+++
+---
+title: Boto3를 활용한 파일 업로드 예제
+linkTitle: 파일 업로드
+draft: false
+date: 2023-09-20
+weight: 2
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html
 

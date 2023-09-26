@@ -1,4 +1,4 @@
-+++
-title = "BLOG"
-draft = false
-+++
+---
+title: BLOG
+draft: false
+---

@@ -1,7 +1,8 @@
-+++
-title = "인덱스분할 API"
-draft = true
-+++
+---
+title: 인덱스분할 API
+draft: true
+date: 2023-09-20
+---
 
 > [https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-split-index.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-split-index.html)
 

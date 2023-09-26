@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 접근권한 예제'
-linkTitle = "접근 권한"
-draft = false
-weight = 7
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 접근권한 예제
+linkTitle: 접근 권한
+draft: false
+weight: 7
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html
 

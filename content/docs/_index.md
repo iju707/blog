@@ -1,7 +1,7 @@
-+++
-title = '문서번역'
-draft = false
-+++
+---
+title: 문서번역
+draft: false
+---
 
 {{< cards >}}
     {{< card link="../elastic" title="Elasticsearch">}}

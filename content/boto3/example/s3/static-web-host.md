@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 정적 웹호스트로 사용하기 예제'
-linkTitle = "정적 웹호스트"
-draft = false
-weight = 8
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 정적 웹호스트로 사용하기 예제
+linkTitle: 정적 웹호스트
+draft: false
+weight: 8
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-static-web-host.html
 

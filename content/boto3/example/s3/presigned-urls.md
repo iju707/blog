@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 사전인증 URL 예제'
-linkTitle = "사전인증 URL"
-draft = false
-weight = 5
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 사전인증 URL 예제
+linkTitle: 사전인증 URL
+draft: false
+weight: 5
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-presigned-urls.html
 

@@ -1,10 +1,11 @@
-+++
-title = 'Boto3를 활용한 파일 다운로드 예제'
-linkTitle = "파일 다운로드"
-draft = false
-weight = 3
-date = "2023-09-20"
-+++
+---
+title: Boto3를 활용한 파일 다운로드 예제
+linkTitle: 파일 다운로드
+draft: false
+weight: 3
+date: 2023-09-20
+type: docs
+---
 
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-download-file.html
 
