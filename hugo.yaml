@@ -13,9 +13,9 @@ markup:
   highlight:
     noClasses: false
 
-defaultContentLanguage: kr
+defaultContentLanguage: ko
 languages:
-  kr:
+  ko:
     languageName: 한국어
     weight: 1
 
@@ -63,10 +63,11 @@ params:
   editURL:
     enable: true
     base: "https://github.com/iju707/blog/edit/master/content"
-  giscus:
-    enabled: true
-    dataRepo: "iju707/blog"
-    dataRepoId: "R_kgDOKUrL5A"
-    dataCategory: "General"
-    dataCategoryId: "DIC_kwDOKUrL5M4CZlVJ"
-    dataLang: "ko"
+  comments:
+    enable: true
+    type: giscus
+    giscus:
+      repo: "iju707/blog"
+      repoId: "R_kgDOKUrL5A"
+      category: "General"
+      categoryId: "DIC_kwDOKUrL5M4CZlVJ"
