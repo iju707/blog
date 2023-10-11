@@ -4,6 +4,6 @@ draft: false
 ---
 
 {{< cards >}}
-    {{< card link="../elastic" title="Elasticsearch">}}
+    {{< card link="../elasticsearch_setup" title="Elasticsearch 구성하기">}}
     {{< card link="../boto3" title="Boto3">}}
 {{< /cards >}}
