@@ -53,9 +53,7 @@ params:
     displayCopyright: true
     displayPoweredBy: true
   displayUpdatedDate: true
-  dateFormat: "January 2, 2006"
-  blog:
-    order: desc
+  dateFormat: "2006년 January 2일"
   page:
     width: full
   search:

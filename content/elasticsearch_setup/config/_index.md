@@ -108,6 +108,22 @@ export HOSTNAME="host1,host2"
 예로 들어, 영구적 설정 또는 `elasticsearch.yml` 설정을 덮어쓰기 위해 휘발성 설정을 적용할 수 있습니다.
 그러나, `elasticsearch.yml`을 변경한 설정은 정의된 휘발성 또는 영구적 설정을 덮어쓸수 없습니다.
 
+{{< callout type="info" >}}
+엘라스틱서치 서비스를 사용하는 경우, 모든 클러스터 설정을 구성하기 위해 [사용자 설정](https://www.elastic.co/guide/en/cloud/current/ec-add-user-settings.html) 기능을 사용합니다.
+이 방법은 엘라스틱서치 서비스에서 클러스터를 망가뜨릴 불안정한 설정을 방지할 수 있습니다.
+
+자체적으로 엘라스틱서치를 실행하는 경우, [클러스터 설정갱신 API](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html)를 사용하여 동적 클러스터 설정을 구성할 수 있습니다.
+'elasticsearch.yml'은 정적 클러스터 설정과 노드 설정에만 사용됩니다.
+API는 재시작이 필요없고 모든 노드에 동일한 설정이 있게 보장합니다.
+{{< /callout >}}
+
+{{< callout type="info" >}}
+더이상 휘발성 클러스터 설정의 사용을 권장하지 않습니다.
+영구적 클러스터 설정을 대신 사용하세요.
+클러스터가 비정상이 되면 휘발성 설정은 예기치않게 초기화되고 궁극적으로 바람직하지 않은 클러스터 구성이 될 수 있습니다.
+[휘발성 설정 마이그레이션 가이드](https://www.elastic.co/guide/en/elasticsearch/reference/current/transient-settings-migration-guide.html)를 참고하세요.
+{{< /callout >}}
+
 ### 고정형
 
 고정형 설정은 `elasticsearch.yml`을 사용해서 시작안된 또는 중단된 노드에 구성할 수 있습니다.
