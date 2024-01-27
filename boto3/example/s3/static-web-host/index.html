@@ -17,6 +17,7 @@ S3 버킷으로 정적웹사이트 호스팅을 구성할 수 있습니다.
 웹사이트 구성 검색하기 파이썬용 AWS SDK의 get_bucket_website 함수를 호출하여 버킷의 웹사이트 구성을 검색할 수 있습니다.
 import boto3 # 웹사이트 구성 검색하기 s3 = boto3.client(&#39;s3&#39;) result = s3.get_bucket_website(Bucket=&#39;BUCKET_NAME&#39;) 웹사이트 구성 설정하기 put_bucket_website 함수를 호출해서 버킷의 웹사이트 구성을 설정할 수 있습니다.
 # 웹사이트 구성 정의하기 website_configuration = { &#39;ErrorDocument&#39;: {&#39;Key&#39;: &#39;error.html&#39;}, &#39;IndexDocument&#39;: {&#39;Suffix&#39;: &#39;index.html&#39;}, } # 웹사이트 구성 설정하기 s3 = boto3.client(&#39;s3&#39;) s3.put_bucket_website(Bucket=&#39;BUCKET_NAME&#39;, WebsiteConfiguration=website_configuration) 웹사이트 구성 삭제하기 delete_bucket_website 함수 호출해서 버킷의 웹사이트 구성을 삭제할 수 있습니다." />
+  <link rel="canonical" href="https://blog.oofbird.me/boto3/example/s3/static-web-host/">
 
   
 

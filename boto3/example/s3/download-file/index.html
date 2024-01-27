@@ -17,6 +17,7 @@
 download_file 함수는 버킷의 이름과 다운로드할 객체, 파일이 저장될 파일이름을 인자로 받습니다.
 import boto3 s3 = boto3.client(&#39;s3&#39;) s3.download_file(&#39;BUCKET_NAME&#39;, &#39;OBJECT_NAME&#39;, &#39;FILE_NAME&#39;) download_fileobj 함수는 쓰기가능한 파일같은 객체를 인자로 받습니다. 파일 객체는 텍스트모드가 아닌 바이너리 모드로 열려있어야 합니다.
 s3 = boto3.client(&#39;s3&#39;) with open(&#39;FILE_NAME&#39;, &#39;wb&#39;) as f: s3.download_fileobj(&#39;BUCKET_NAME&#39;, &#39;OBJECT_NAME&#39;, f) 업로드와 비슷하게, 다운로드 함수도 S3 Client, Bucket, Object 클래스에서 제공되며 각각 클래스에서 제공하는 기능은 모두 동일합니다." />
+  <link rel="canonical" href="https://blog.oofbird.me/boto3/example/s3/download-file/">
 
   
 

@@ -16,6 +16,7 @@
 S3 버킷은 다른 AWS 계정, AWS 식별자와 접근 관리(IAM) 사용자에 대한 접근권한을 부여할 수 있는 선택적 옵션을 가지고 있습니다. 버킷 정책은 자원기반 IAM 정책과 동일한 JSON 형식을 사용하여 정의할 수 있습니다.
 버킷 정책 검색하기 파이썬용 AWS SDK의 get_bucket_policy 함수를 호출하여 버킷 정책을 검색할 수 있습니다. 함수는 특정 버킷이름을 인자로 받습니다.
 import boto3 # 특정 버킷의 정책을 검색하기 s3 = boto3.client(&#39;s3&#39;) result = s3.get_bucket_policy(Bucket=&#39;BUCKET_NAME&#39;) print(result[&#39;Policy&#39;]) 버킷 정책 설정하기 버킷 정책은 put_bucket_policy 함수를 호출하여 설정할 수 있습니다." />
+  <link rel="canonical" href="https://blog.oofbird.me/boto3/example/s3/bucket-policies/">
 
   
 

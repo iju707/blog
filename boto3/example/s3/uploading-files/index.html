@@ -16,6 +16,7 @@
 파이썬용 AWS SDK는 S3 버킷에 파일을 업로드하는 두가지 함수를 제공합니다.
 upload_file 함수는 파일이름, 버킷이름, 객체이름을 인자로 받습니다. 함수는 작은 청크로 분할하고 병렬로 청크를 업로드하여 큰파일을 다룹니다.
 import logging import boto3 from botocore.exceptions import ClientError import os def upload_file(file_name, bucket, object_name=None): &#34;&#34;&#34; S3 버킷에 파일을 업로드합니다. :param file_name: 업로드할 파일 :param bucket: 업로드될 버킷 :param object_name: S3 객체이름. 없으면 file_name 사용 :return: 파일이 업로드되면 True, 아니면 False &#34;&#34;&#34; # S3 객체이름이 정의되지 않으면, file_name을 사용 if object_name is None: object_name = os." />
+  <link rel="canonical" href="https://blog.oofbird.me/boto3/example/s3/uploading-files/">
 
   
 
