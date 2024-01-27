@@ -32,13 +32,19 @@
     <loc>https://blog.oofbird.me/boto3/example/s3/privatelink/</loc>
     <lastmod>2023-09-20T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://blog.oofbird.me/elastic/</loc>
+    <lastmod>2024-01-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.oofbird.me/</loc>
+    <lastmod>2024-01-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.oofbird.me/elastic/rest-apis/indices-split-index/</loc>
+    <lastmod>2024-01-22T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://blog.oofbird.me/blog/20240113-logioptions/</loc>
     <lastmod>2024-01-13T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.oofbird.me/blog/</loc>
-    <lastmod>2024-01-13T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.oofbird.me/</loc>
     <lastmod>2024-01-13T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.oofbird.me/blog/20231228-vmware-ctrix/</loc>
@@ -87,9 +93,6 @@
     <lastmod>2023-09-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.oofbird.me/boto3/</loc>
-    <lastmod>2023-09-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.oofbird.me/elastic/</loc>
     <lastmod>2023-09-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.oofbird.me/elastic/rest-apis/</loc>
