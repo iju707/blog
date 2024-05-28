@@ -1,0 +1,19 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – Boto3 문서</title>
+    <link>https://blog.oofbird.me/boto3/</link>
+    <description>Recent content in Boto3 문서 on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://blog.oofbird.me/boto3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

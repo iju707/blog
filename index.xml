@@ -1,0 +1,873 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – OOFBIRD</title>
+    <link>https://blog.oofbird.me/</link>
+    <description>Recent content on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 22 Jan 2024 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://blog.oofbird.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+      
+    
+    
+    <item>
+      <title>[LogiOptions&#43;] 실행안됨현상 해결</title>
+      <link>https://blog.oofbird.me/blog/20240113-logioptions/</link>
+      <pubDate>Sat, 13 Jan 2024 00:00:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20240113-logioptions/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;현상&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;현상&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%98%84%ec%83%81&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;프록시가 있는 사내 환경에서 Logi Options+를 설치하고 사용하려고 했습니다.
+그런데 설치가 잘 안되거나 실행이 안되는 현상이 있어 해결한 방법을 공유합니다.&lt;/p&gt;
+&lt;h2&gt;해결방법 1 - offline 설치&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결방법-1---offline-설치&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95-1---offline-%ec%84%a4%ec%b9%98&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;기본 설치파일은 온라인을 경유하여 다운로드를 받게 됩니다.
+따라서 프록시나 인터넷이 안되는 환경에서는 다음 오프라인 버전을 사용합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://prosupport.logi.com/hc/en-us/articles/10991109278871-Logitech-Options-Offline-Installer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://prosupport.logi.com/hc/en-us/articles/10991109278871-Logitech-Options-Offline-Installer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;내용 중간의 &lt;strong&gt;Windows Options+ Offline Version&lt;/strong&gt; 또는 &lt;strong&gt;Mac Options+ Offline Version&lt;/strong&gt;을 선택하여 받으면 됩니다.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././images/20240113-logioptions/logi_options_download.png&#34; alt=&#34;logi_options_download&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;해결방법 2 - &amp;ndash;no-sandbox 옵션&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결방법-2-----no-sandbox-옵션&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95-2-----no-sandbox-%ec%98%b5%ec%85%98&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;설치까지 완료하였는데 실행에서 문제가 있을 수 있습니다.
+현상은 보통 실행시켰는데 화면이 나오지 않고 아무 반응이 없습니다.&lt;/p&gt;
+&lt;p&gt;설치된 경로 (보통 &lt;code&gt;C:\Program Files\LogiOptionsPlus&lt;/code&gt;)에 보면 &lt;code&gt;debug.log&lt;/code&gt; 파일이 있고 내용을 보면 다음과 같을 것 입니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Failed to load C:\Program Files\LogiOptionsPlus\chrome_100_percent.pak
+Some features may not be available.&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;일부 기능로딩에 문제가 있고 임시방편으로 sandbox 모드를 해제하는 것 입니다.
+아래와 같이 명령 끝에 &lt;code&gt;--no-sandbox&lt;/code&gt;를 추가하여 실행하면 정상실행됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;C:\Program Files\LogiOptionsPlus&amp;gt; logioptionsplus.exe --no-sandbox&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;다만 보안적 요소와 관련된 설정이므로, 필요한 설정을 마친 뒤 프로세스를 꼭 종료해야합니다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[VMware] Ctrix workspace 느린현상</title>
+      <link>https://blog.oofbird.me/blog/20231228-vmware-ctrix/</link>
+      <pubDate>Thu, 28 Dec 2023 00:00:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20231228-vmware-ctrix/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;현재 환경&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;현재-환경&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%98%84%ec%9e%ac-%ed%99%98%ea%b2%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Macbook Pro M3pro&lt;/li&gt;
+&lt;li&gt;VMware Fusion Player 13.5.0&lt;/li&gt;
+&lt;li&gt;Windows 11 arm&lt;/li&gt;
+&lt;li&gt;Ctrix Workspace 23.9.1.104 (2309.1)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;상황&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;상황&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%83%81%ed%99%a9&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;현재 Ctrix Workspace를 사용하여 가상 데스크톱 인프라(VDI)를 구축하고 접속해서 업무를 진행하고 있습니다.
+최근 맥북으로 변경하고 VMware를 사용하여 Windows 11 arm 버전을 설치한 뒤 접속하였는데 너무 반응속도가 느렸습니다.
+CPU나 메모리 사용도 여유로웠고 VDI 밖에서 네트워크도 준수한 속도를 가지고 있었습니다.&lt;/p&gt;
+&lt;p&gt;검색을 해보니 3D 가속에 이슈가 있어보이고 옵션을 끄는 방식으로 해결이 가능합니다.&lt;/p&gt;
+&lt;h2&gt;방법 1 - VMware에서 &lt;code&gt;Accelerate 3D Graphics&lt;/code&gt; 끄기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;방법-1---vmware에서-accelerate-3d-graphics-끄기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%b0%a9%eb%b2%95-1---vmware%ec%97%90%ec%84%9c-accelerate-3d-graphics-%eb%81%84%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;VM이 꺼진 상태에서 &lt;code&gt;Virtual Machine &amp;gt; Settings &amp;gt; Display&lt;/code&gt; 메뉴로 이동 후 &lt;code&gt;Accelerate 3D Graphics&lt;/code&gt; 체크를 해지 합니다.&lt;/p&gt;
+&lt;h2&gt;방법 2 - DirectX SDK 설치 후 software only로 변경&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;방법-2---directx-sdk-설치-후-software-only로-변경&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%b0%a9%eb%b2%95-2---directx-sdk-%ec%84%a4%ec%b9%98-%ed%9b%84-software-only%eb%a1%9c-%eb%b3%80%ea%b2%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;steps hx-ml-4 hx-mb-12 ltr:hx-border-l rtl:hx-border-r hx-border-gray-200 ltr:hx-pl-6 rtl:hx-pr-6 dark:hx-border-neutral-800 [counter-reset:step]&#34;&gt;
+&lt;h3&gt;DirectX SDK를 설치&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;directx-sdk를-설치&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#directx-sdk%eb%a5%bc-%ec%84%a4%ec%b9%98&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Windows에서 DirectX SDK를 설치합니다.&lt;/p&gt;
+&lt;p&gt;다운로드 경로 : &lt;a href=&#34;https://www.microsoft.com/ko-kr/download/details.aspx?id=6812&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.microsoft.com/ko-kr/download/details.aspx?id=6812&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;DirectX Control Panel 설정변경&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;directx-control-panel-설정변경&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#directx-control-panel-%ec%84%a4%ec%a0%95%eb%b3%80%ea%b2%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;DirextX Control Panel을 실행한 뒤 &lt;code&gt;Direct3D 9&lt;/code&gt; 탭에서 &lt;code&gt;Software Only&lt;/code&gt;를 체크합니다.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././images/20231228-vmware-ctrix/directx_control_panel.png&#34; alt=&#34;DirectX Control Panel&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Pyhon] 문자열을 연산자로 사용하기</title>
+      <link>https://blog.oofbird.me/blog/20231028-python-op/</link>
+      <pubDate>Sat, 28 Oct 2023 04:46:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20231028-python-op/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;원하는 것&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;원하는-것&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9b%90%ed%95%98%eb%8a%94-%ea%b2%83&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;문자열로 연산식을 받고 이것에 대한 계산결과를 보고 싶습니다.
+예로 &lt;code&gt;3 + 2&lt;/code&gt; 를 받으면 &lt;code&gt;5&lt;/code&gt; 이라는 결과를 받고 싶습니다.&lt;/p&gt;
+&lt;h2&gt;방법 1 : eval&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;방법-1--eval&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%b0%a9%eb%b2%95-1--eval&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;단순하게 &lt;code&gt;if&lt;/code&gt;를 사용해도 &lt;code&gt;eval&lt;/code&gt; 을 사용해도 됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;3 + 2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;그런데 &lt;code&gt;eval&lt;/code&gt;의 경우에는 원하는 용도 이외에도 처리해버리기 때문에 위험합니다.&lt;/p&gt;
+&lt;h2&gt;방법 2 : operator&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;방법-2--operator&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%b0%a9%eb%b2%95-2--operator&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;python에서는 &lt;code&gt;operator&lt;/code&gt; 라는 패키지를 제공합니다.
+이것을 활용하여 연산처리를 진행하면 됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;operator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ops&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;+&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mul&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;truediv&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;3 + 2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;split_input&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ops&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]](&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 5&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;operator&lt;/code&gt;에서 지원하는 연산자 목록은 아래를 참고하세요.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.python.org/ko/3/library/operator.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docs.python.org/ko/3/library/operator.html&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Linux] 재부팅없이 sysctl 설정 다시읽기(reload)</title>
+      <link>https://blog.oofbird.me/blog/20231013-sysctl-reload/</link>
+      <pubDate>Fri, 13 Oct 2023 23:39:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20231013-sysctl-reload/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;개요&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;개요&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b0%9c%ec%9a%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Linux 환경에 Elasticsearch를 설치하는데 시스템 설정 수정이 필요합니다. (vm.max_map_count)
+다만, 운영환경이고 별도절차가 있어서 재부팅하기 쉽지 않습니다.
+재부팅하지 않고 sysctl로 설정한 내용을 다시 읽는 법을 공유합니다.&lt;/p&gt;
+&lt;h2&gt;다시읽기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;다시읽기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%8b%a4%ec%8b%9c%ec%9d%bd%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;아래 명령을 수행하면 재부팅없이 다시 읽게 됩니다. 필요시 &lt;code&gt;sudo&lt;/code&gt;가 요구됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sysctl --system&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;다시읽은 파일&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;다시읽은-파일&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%8b%a4%ec%8b%9c%ec%9d%bd%ec%9d%80-%ed%8c%8c%ec%9d%bc&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;위 명령을 실행하면 아래의 파일을 다시 읽게 됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;/run/sysctl.d/*.conf&lt;/li&gt;
+&lt;li&gt;/etc/sysctl.d/*.conf&lt;/li&gt;
+&lt;li&gt;/usr/local/lib/sysctl.d/*conf&lt;/li&gt;
+&lt;li&gt;/usr/lib/sysctl.d/*.conf&lt;/li&gt;
+&lt;li&gt;/lib/sysctl.d/*conf&lt;/li&gt;
+&lt;li&gt;/etc/sysctl.conf&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Git] Failed to find a valid digest in the &#34;integrity&#34; attribute for resource</title>
+      <link>https://blog.oofbird.me/blog/20231012-core_autocrlf/</link>
+      <pubDate>Thu, 12 Oct 2023 04:01:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20231012-core_autocrlf/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;현상&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;현상&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%98%84%ec%83%81&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Hugo를 활용하여 Github Page에 블로그를 생성하였습니다.
+기존 MacOS환경에서는 큰 문제가 없었는데 Windows 환경으로 오고나서 배포를 하니 버튼동작이 하지 않고 크롬콘솔에서 다음과 같이 오류가 발생하였습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Failed to find a valid digest in the &amp;lsquo;integrity&amp;rsquo; attribute for resource &amp;lsquo;&amp;hellip;.&amp;rsquo; with computed SHA-256 integrity &amp;lsquo;&amp;hellip;.&amp;rsquo;. The resource has been blocked.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.oofbird.me/blog/images/20231012-core_autocrlf/image.png&#34; alt=&#34;크롬오류&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;내용상 파일의 digest가 일치하지 않아 차단처리를 한 것으로 보입니다.&lt;/p&gt;
+&lt;h2&gt;원인&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;원인&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9b%90%ec%9d%b8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;MacOS 환경에서는 정상이었으나 Windows에서 문제가 발생하였다는 점에 빌드나 배포를 점검하였습니다.&lt;/p&gt;
+&lt;p&gt;Git에서 commit 하는 메시지 중 다음을 발견하였습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;PS &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;workspace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;upload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;bat&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Initialized&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;empty&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;repository&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;workspace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;git&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;working&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;copy &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;404.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CRLF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;will&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;replaced&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;touches&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;it&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;working&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;copy &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;blog/index.xml&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CRLF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;will&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;replaced&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;touches&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;it&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;working&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;copy &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;boto3/example/index.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CRLF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;will&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;replaced&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;touches&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;it&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;working&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;copy &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;boto3/example/index.xml&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CRLF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;will&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;replaced&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;touches&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;it&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;working&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;copy &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;boto3/example/s3/index.xml&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CRLF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;will&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;replaced&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;touches&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;it&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;working&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;copy &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;boto3/example/s3/presigned-urls/index.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CRLF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;will&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;replaced&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LF&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Git&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;touches&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;it&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;내용인즉슨 windows에서 사용하는 줄내림(CRLF, \r\n)를 Linux/Mac용(LF, \n)로 변경하는 것 입니다.
+이로 인하여 빌드시점의 파일과 형상에 업로드된 파일이 바뀌게 된 것 입니다.&lt;/p&gt;
+&lt;h2&gt;해결책&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결책&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%ec%b1%85&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;배포할 때 줄내림을 바꾸지 않도록 git에 설정을 하였습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git config core.autocrlf false&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;일반적으로 권장되지 않는 옵션이지만, 위와 같이 특수한 상황인 경우 적용이 필요합니다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Git] Submodule이 있는 저장소 Clone 하기</title>
+      <link>https://blog.oofbird.me/blog/20231012-git-submodule/</link>
+      <pubDate>Thu, 12 Oct 2023 03:22:19 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20231012-git-submodule/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;개요&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;개요&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b0%9c%ec%9a%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Git 프로젝트에서 다른 Repository를 모듈로 참조할 경우 Submodule로 등록합니다.
+아래는 기존의 프로젝트를 Clone할 때 Submodule을 어떻게 처리해야하는지 안내합니다.&lt;/p&gt;
+&lt;h2&gt;방법 1 : 개별 초기화&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;방법-1--개별-초기화&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%b0%a9%eb%b2%95-1--%ea%b0%9c%eb%b3%84-%ec%b4%88%ea%b8%b0%ed%99%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;먼저 &lt;code&gt;git submodule init&lt;/code&gt; 명령으로 submodule을 초기화 합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git submodule init
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Submodule &lt;span class=&#34;s1&#34;&gt;&amp;#39;themes/hextra&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;https://github.com/imfing/hextra.git&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; registered &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; path &lt;span class=&#34;s1&#34;&gt;&amp;#39;themes/hextra&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;git submodule update&lt;/code&gt; 로 최신 형상으로 업데이트 합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git submodule update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Cloning into &lt;span class=&#34;s1&#34;&gt;&amp;#39;C:/workspace/blog/themes/hextra&amp;#39;&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Submodule path &lt;span class=&#34;s1&#34;&gt;&amp;#39;themes/hextra&amp;#39;&lt;/span&gt;: checked out &lt;span class=&#34;s1&#34;&gt;&amp;#39;28a20e1e7e2e90dc128a3439bf88c1ecccff9220&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;방법 2 : Clone시 옵션주기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;방법-2--clone시-옵션주기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%b0%a9%eb%b2%95-2--clone%ec%8b%9c-%ec%98%b5%ec%85%98%ec%a3%bc%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Clone을 할 때 &lt;code&gt;--recurse-submodules&lt;/code&gt; 옵션을 추가하면 됩니다.
+그러면 형상을 Clone하면서 Submodule 까지 포함하여 진행합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git clone --recurse-submodules https://github.com/iju707/blog.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Cloning into &lt;span class=&#34;s1&#34;&gt;&amp;#39;blog&amp;#39;&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Enumerating objects: 448, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Counting objects: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;448/448&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Compressing objects: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;203/203&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Receiving objects:  87% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;390/448&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;used &lt;span class=&#34;m&#34;&gt;418&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;delta 150&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, pack-reused &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Receiving objects: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;448/448&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, 852.84 KiB &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 35.53 MiB/s, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Resolving deltas: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;176/176&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Submodule &lt;span class=&#34;s1&#34;&gt;&amp;#39;themes/hextra&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;https://github.com/imfing/hextra.git&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; registered &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; path &lt;span class=&#34;s1&#34;&gt;&amp;#39;themes/hextra&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Cloning into &lt;span class=&#34;s1&#34;&gt;&amp;#39;C:/workspace/test/blog/themes/hextra&amp;#39;&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Enumerating objects: 1781, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Counting objects: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;413/413&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Compressing objects: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;121/121&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remote: Total &lt;span class=&#34;m&#34;&gt;1781&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;delta 327&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, reused &lt;span class=&#34;m&#34;&gt;312&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;delta 288&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, pack-reused &lt;span class=&#34;m&#34;&gt;1368&lt;/span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Receiving objects: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1781/1781&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, 3.02 MiB &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 29.17 MiB/s, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Resolving deltas: 100% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1017/1017&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Submodule path &lt;span class=&#34;s1&#34;&gt;&amp;#39;themes/hextra&amp;#39;&lt;/span&gt;: checked out &lt;span class=&#34;s1&#34;&gt;&amp;#39;28a20e1e7e2e90dc128a3439bf88c1ecccff9220&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[PostgreSQL] 재시작없이 설정불러오기 (reload configuration without restart)</title>
+      <link>https://blog.oofbird.me/blog/20230927-postgresql/</link>
+      <pubDate>Wed, 27 Sep 2023 00:20:35 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20230927-postgresql/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;개요&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;개요&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b0%9c%ec%9a%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;PostgreSQL은 다양한 설정을 파일로 다루고 있습니다.
+그중 pg_hba.conf 파일로 접근제어를 하게 되는데 운영중 수정이 필요한 상황이 발생했을 때 재시작 없이 적용하는 방법을 가이드 합니다.&lt;/p&gt;
+&lt;h2&gt;pg_ctl 이용&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;pg_ctl-이용&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#pg_ctl-%ec%9d%b4%ec%9a%a9&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;pg_ctl에서는 다음방법으로 설정로딩을 지원합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ pg_ctl reload &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-s&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-D datadir&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;옵션은&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-s&lt;/strong&gt; : 오류 관련 메시지만 출력합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-D datadir&lt;/strong&gt; : PostgreSQL이 사용하는 데이터 경로를 지정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Query 이용&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;query-이용&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#query-%ec%9d%b4%ec%9a%a9&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;SQL 내에서도 설정로딩을 할 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PG_RELOAD_CONF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;제약사항&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;제약사항&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%a0%9c%ec%95%bd%ec%82%ac%ed%95%ad&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;일반적인 설정은 재적용이 가능하나, 일부 재시작이 필요한 설정은 적용되지 않습니다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[MariaDB] 문자열을 날짜로 STR_TO_DATE</title>
+      <link>https://blog.oofbird.me/blog/20230927-mariadb/</link>
+      <pubDate>Wed, 27 Sep 2023 00:11:43 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20230927-mariadb/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;개요&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;개요&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b0%9c%ec%9a%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;MariaDB에서 문자열을 날짜형으로 변경하는 방법입니다.&lt;/p&gt;
+&lt;h2&gt;문법&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;문법&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%ac%b8%eb%b2%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;STR_TO_DATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;str&lt;/strong&gt;은 날짜로 전환할 문자열이며, &lt;strong&gt;format&lt;/strong&gt;은 문자열의 형식입니다.&lt;/p&gt;
+&lt;h2&gt;Format&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;format&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#format&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;주요 형식은 다음과 같습니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;옵션&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%Y&lt;/td&gt;
+&lt;td&gt;4자리 년도 (예: 2021)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%y&lt;/td&gt;
+&lt;td&gt;2자리 년도 (예: 21)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%m&lt;/td&gt;
+&lt;td&gt;2자리 월 (예: 01)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%d&lt;/td&gt;
+&lt;td&gt;2자리 일 (예: 01)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%H&lt;/td&gt;
+&lt;td&gt;2자리 시간 (00 ~ 23)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%h&lt;/td&gt;
+&lt;td&gt;2자리 시간 (01 ~ 12)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%i&lt;/td&gt;
+&lt;td&gt;2자리 분&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;%S&lt;/td&gt;
+&lt;td&gt;2자리 초&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;예시&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;예시&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%98%88%ec%8b%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;STR_TO_DATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;20200101 23:59:59&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%Y%m%d %H:%i%S&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2020&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;01&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;01&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;59&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;59&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Synology] EAC3 코덱 재생하기</title>
+      <link>https://blog.oofbird.me/blog/20230923-synology-eac3/</link>
+      <pubDate>Sat, 23 Sep 2023 23:35:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20230923-synology-eac3/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;개요&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;개요&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b0%9c%ec%9a%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Video Station에서 영상을 재생할 때 간헐적으로 지원되지 않는 오디오 코덱으로 안되는 경우가 있습니다.
+원인을 찾아보면 특허 문제로 인하여 공식 지원이 불가능한 경우입니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://kb.synology.com/ko-kr/DSM/tutorial/Why_can_t_I_play_videos_with_DTS_or_EAC3_audio_format_on_Video_Station&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video Station 에서 DTS 또는 EAC3 오디오 형식의 비디오를 재생할 수 없는 이유는 무엇입니까?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;현재 Video Station 은 특허 라이센스 문제로 인해 다음과 같은 오디오 형식을 재생할 수 없습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DTS 및 DTS-HD를 포함하되 이에 국한되지 않고 모든 DTS 오디오 형식&lt;/li&gt;
+&lt;li&gt;부분적인 돌비 디지털 오디오 형식(Dolby Digital Plus(EAC3) 및 돌비 TrueHD를 포함하되 이에 국한되지 않음)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;해결방법&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결방법&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;아래와 같이 설정하면 장치가 재부팅할때 마다 스크립트가 실행됩니다.
+따라서 DSM이 업데이트되더라도 계속적으로 적용이 가능합니다.&lt;/p&gt;
+&lt;div class=&#34;steps hx-ml-4 hx-mb-12 ltr:hx-border-l rtl:hx-border-r hx-border-gray-200 ltr:hx-pl-6 rtl:hx-pr-6 dark:hx-border-neutral-800 [counter-reset:step]&#34;&gt;
+&lt;h3&gt;커뮤니티 패키지 소스 설정하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;커뮤니티-패키지-소스-설정하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%bb%a4%eb%ae%a4%eb%8b%88%ed%8b%b0-%ed%8c%a8%ed%82%a4%ec%a7%80-%ec%86%8c%ec%8a%a4-%ec%84%a4%ec%a0%95%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;패키지 센터 &amp;gt; 설정&lt;/strong&gt; 을 클릭한 뒤 &lt;strong&gt;패키지 소스&lt;/strong&gt; 탭에서 다음과 같이 입력합니다.&lt;/p&gt;
+&lt;p&gt;위치 : &lt;a href=&#34;https://packages.synocommunity.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://packages.synocommunity.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.oofbird.me/blog/images/4/synology-package.png&#34; alt=&#34;패키지 소스&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;FFMPEG 패키지를 설치하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;ffmpeg-패키지를-설치하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ffmpeg-%ed%8c%a8%ed%82%a4%ec%a7%80%eb%a5%bc-%ec%84%a4%ec%b9%98%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;패키지 소스 설정이 완료되면 왼쪽에 &lt;strong&gt;커뮤니티&lt;/strong&gt; 메뉴가 추가되며 그곳에서 &lt;strong&gt;ffmpeg&lt;/strong&gt;를 설치합니다. (4~6 버전 무관)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.oofbird.me/blog/images/4/synology-ffmpeg.png&#34; alt=&#34;FFMPEG&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;작업 스케쥴러 생성하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;작업-스케쥴러-생성하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9e%91%ec%97%85-%ec%8a%a4%ec%bc%80%ec%a5%b4%eb%9f%ac-%ec%83%9d%ec%84%b1%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;제어판 &amp;gt; 서비스 &amp;gt; 작업 스케쥴러&lt;/strong&gt; 메뉴에서 &lt;strong&gt;생성 &amp;gt; 트리거된 작업 &amp;gt; 사용자 정의 스크립트&lt;/strong&gt; 를 클릭합니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.oofbird.me/blog/images/4/synology-trigger.png&#34; alt=&#34;트리거된 작업&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;일반 설정 탭에서 사용자는 &lt;strong&gt;root&lt;/strong&gt;, 이벤트는 &lt;strong&gt;부트업&lt;/strong&gt; 으로 설정합니다.&lt;/p&gt;
+&lt;p&gt;작업 설정 탭의 실행 명령에서 다음을 입력합니다. 이때 FFMEPG VERSION은 설치한 버전에 맞게 선택합니다. (예: 6)&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;curl https://raw.githubusercontent.com/AlexPresso/VideoStation-FFMPEG-Patcher/main/patcher.sh | bash -s -- &amp;lt;FFMEPG Version&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.oofbird.me/blog/images/4/synology-script.png&#34; alt=&#34;Alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;적용하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;적용하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%a0%81%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;작업 스케줄러 목록에서 생성한 대상을 선택 후 &lt;strong&gt;마우스 오른쪽 &amp;gt; 실행&lt;/strong&gt; 버튼을 클릭합니다.&lt;/p&gt;
+&lt;p&gt;결과는 대상 선택 후 상단의 &lt;strong&gt;작업 &amp;gt; 결과 보기&lt;/strong&gt; 로 확인할 수 있습니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;참고 : &lt;a href=&#34;https://github.com/AlexPresso/VideoStation-FFMPEG-Patcher&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/AlexPresso/VideoStation-FFMPEG-Patcher&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Git] Proxy 설정하기</title>
+      <link>https://blog.oofbird.me/blog/20230923-git-proxy/</link>
+      <pubDate>Sat, 23 Sep 2023 22:25:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20230923-git-proxy/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;개요&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;개요&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b0%9c%ec%9a%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Git을 사내에서 사용하다보면 일반적으로 프록시 문제를 경험하게 됩니다.
+왠만한 기업에서는 보안을 이유로 프록시를 도입하여 네트워크가 구성되어있기 때문입니다.
+그런데, 프록시를 설정해놓으면 구성에 따라 내부 Git Repository에 접속하지 못하는 사태가 발생하게 됩니다.
+아래 내용을 통하여 외부는 프록시를, 내부는 다이렉트로 접근하는 방법을 설정해보겠습니다.&lt;/p&gt;
+&lt;h2&gt;외부 Proxy 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;외부-proxy-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%99%b8%eb%b6%80-proxy-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;기본적으로 Git은 &lt;code&gt;http_proxy&lt;/code&gt;, &lt;code&gt;https_proxy&lt;/code&gt;, &lt;code&gt;all_proxy&lt;/code&gt; 와 같은 환경변수를 사용하여 프록시 설정을 구성합니다.
+별도 지정할 경우 &lt;code&gt;http.proxy&lt;/code&gt; 설정을 추가합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git config --global http.proxy &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;protocol://&lt;span class=&#34;o&#34;&gt;][&lt;/span&gt;user&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;:password&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;@&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;proxyhost&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;:port&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;// http://128.0.0.1:8080 일 경우
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git config --global http.proxy http://128.0.0.1:8080&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;추가적으로 대부분의 사이트는 HTTPS를 사용하며 보통 프록시를 통과할 경우 인증서검증에 실패할 가능성이 있습니다.
+이것을 우회하기 위해 &lt;code&gt;http.sslVerify&lt;/code&gt; 설정을 추가합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git config --global http.sslVerify false&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;내부 Git Repository Proxy 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;내부-git-repository-proxy-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%82%b4%eb%b6%80-git-repository-proxy-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;보통 내부 Git Repository는 프록시네트워크 안쪽에 위치하므로 Proxy 예외처리를 진행하게 됩니다.
+Git에서는 &lt;code&gt;http.&amp;lt;url&amp;gt;.*&lt;/code&gt; 을 사용하여 특정 URL에 설정을 지정할 수 있게 되어있습니다.
+예시로 &lt;a href=&#34;https://code.oofbird.me&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://code.oofbird.me&lt;/a&gt; 를 Git Repository라고 할 경우 다음과 같이 Proxy를 공백으로 설정하시면 됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git config --global http.https://code.oofbird.me.proxy &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;.gitconfig 파일 확인&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;gitconfig-파일-확인&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#gitconfig-%ed%8c%8c%ec%9d%bc-%ed%99%95%ec%9d%b8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Git에서 config 명령을 수행하면 일반적으로 &lt;code&gt;.gitconfig&lt;/code&gt; 파일을 생성하게 됩니다.
+위치는 보통 사용자홈디렉터리에 있습니다. (예: Windows의 경우 &lt;code&gt;C:\Users\user\.gitconfig&lt;/code&gt;)
+위와 같이 명령을 실행하였을 경우 다음과 같습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;[http]
+	proxy = http://128.0.0.1:8080
+	sslVerify = false
+[http &amp;#34;https://code.oofbird.me&amp;#34;]
+	proxy =&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[ReactJS] create-react-app의 실행 포트 변경</title>
+      <link>https://blog.oofbird.me/blog/20230921-reactjs/</link>
+      <pubDate>Thu, 21 Sep 2023 00:38:36 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20230921-reactjs/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;문제점&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;문제점&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%ac%b8%ec%a0%9c%ec%a0%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;ReactJS로 프로젝트를 시작하면, 보통 &lt;a href=&#34;https://create-react-app.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;create-react-app&lt;/code&gt;&lt;/a&gt;을 사용합니다.
+개발을 하고 시작을 하려면 다음과 같은 명령을 실행하게 됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ yarn run start&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;그러면 http://localhost:3000으로 페이지가 열리게 됩니다.
+환경에 따라 다른 포트로 실행하고 싶습니다.&lt;/p&gt;
+&lt;h2&gt;해결방법&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결방법&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Start Script 수정하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;start-script-수정하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#start-script-%ec%88%98%ec%a0%95%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;실제 start 스크립트를 보면 다음과 같이 포트를 설정하고 있습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;DEFAULT_PORT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;parseInt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;env&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;PORT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;따라서 package.json 파일에서 scripts 부분의 start에 &lt;code&gt;PORT&lt;/code&gt; 환경변수 설정을 추가합니다.
+여기서는 Windows환경에서 &lt;code&gt;set&lt;/code&gt;을 활용하여 9090포트로 변경하겠습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;scripts&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;set PORT=9090 &amp;amp;&amp;amp; react-scripts start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Linux의 경우에는 &lt;code&gt;export&lt;/code&gt;를 활용하시면 됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;scripts&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;export PORT=9090 &amp;amp;&amp;amp; react-scripts start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Mac의 경우에는 다음과 같습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;scripts&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;PORT=9090 react-scripts start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;.env 파일 활용하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;env-파일-활용하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#env-%ed%8c%8c%ec%9d%bc-%ed%99%9c%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;다음 방법은 .env 파일을 사용하면 됩니다.
+프로젝트 상위 디렉터리에 .env 파일을 생성하고 다음과 같이 입력합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;PORT=9090&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>[Windows] Failover Cluster 생성실패 (로그온 실패)</title>
+      <link>https://blog.oofbird.me/blog/20230921-windows-failover/</link>
+      <pubDate>Thu, 21 Sep 2023 00:27:33 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20230921-windows-failover/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;문제점&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;문제점&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%ac%b8%ec%a0%9c%ec%a0%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;MSSQL MSCS를 구성하기 위해 장애조치(Failover) 클러스터를 구성하려고 하였습니다.
+만들기 과정에서 계속 실패가 발생했고 원인을 알 수 없었습니다.&lt;/p&gt;
+&lt;h2&gt;원인확인&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;원인확인&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9b%90%ec%9d%b8%ed%99%95%ec%9d%b8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;이벤트 뷰어에서 관리자 이벤트를 살펴보았습니다.
+Cluster Service가 시작이 불가능했고 &lt;strong&gt;Service Control Manager에서 7024 오류&lt;/strong&gt;가 발생하였습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Cluster Service 서비스가 서비스 특정 오류
+
+로그온 실패 : 사용자는 이 컴퓨터에서는 요청된 로그온 유형을 허가받지 않았습니다. 때문에 종료되었습니다.&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;로그인에 문제가 있을 것 같아서 Windows 로그의 보안 로그를 확인했습니다.
+내용을 보니 &lt;strong&gt;감사 실패 - 4625&lt;/strong&gt; 가 발생하였고 상세 내용중 다음이 있었습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;로그온을 실패한 계정
+
+계정 이름 CLIUSR&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;해결방법&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결방법&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;CLIUSR&lt;/strong&gt; 계정은 클러스터를 구성할 때 자동으로 생성되는 계정으로 원격지에서 로그인 할 수 있는 권한이 누락된지 확인했습니다.
+&lt;strong&gt;로컬 보안 정책&lt;/strong&gt; 에서 &lt;strong&gt;로컬 정책 &amp;gt; 사용자 권한 할당&lt;/strong&gt; 메뉴로 가면 &lt;em&gt;네트워크에서 이 컴퓨터 액세스&lt;/em&gt; 정책 있습니다.
+저의 경우 일반적인 보안으로 인하여 Administrators 그룹만 있었습니다.
+여기에 &lt;strong&gt;Authenticated Users&lt;/strong&gt;를 추가하고 다시 클러스터를 생성하니 정상처리되었습니다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

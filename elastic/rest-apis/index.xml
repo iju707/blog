@@ -1,0 +1,338 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – REST API</title>
+    <link>https://blog.oofbird.me/elastic/rest-apis/</link>
+    <description>Recent content in REST API on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://blog.oofbird.me/elastic/rest-apis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>인덱스분할 API</title>
+      <link>https://blog.oofbird.me/elastic/rest-apis/indices-split-index/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.oofbird.me/elastic/rest-apis/indices-split-index/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-split-index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-split-index.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;기존 인덱스를 추가적인 기본 샤드를 가진 새로운 인덱스로 분할합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST /my-index-000001/_split/split-my-index-000001
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;index.number_of_shards&amp;#34;&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;aaa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;요청&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index-api-request&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index-api-request&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;POST /&amp;lt;index&amp;gt;/_split/&amp;lt;target-index&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PUT /&amp;lt;index&amp;gt;/_split/&amp;lt;target-index&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;사전조건&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index-api-prereqs&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index-api-prereqs&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;만약 엘라스틱서치의 보안기능이 활성화되어있다면, 작업할 인덱스에 대한 &lt;code&gt;manage&lt;/code&gt; &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/security-privileges.html#privileges-list-indices&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;권한&lt;/a&gt;이 있어야 합니다.&lt;/li&gt;
+&lt;li&gt;인덱스를 분할하기 전에
+&lt;ul&gt;
+&lt;li&gt;인덱스는 읽기 전용이어야 합니다.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;클러스터의 상태&lt;/a&gt;는 그린이어야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아래의 요청으로 인덱스를 읽기전용으로 만들 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PUT /my_source_index/_settings
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;index.blocks.write&amp;#34;&lt;/span&gt;: &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;인덱스에 쓰기 동작을 방지하더라도 인덱스 삭제와 같은 메타데이터 변경은 허용됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;현재 데이터 스트림에서 쓰고있는 인덱스는 분할할 수 없습니다.
+현재 쓰고 있는 인덱스를 분할하기 위해서는 데이터 스트림이 먼저 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams.html#data-streams-rollover&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;롤오버&lt;/a&gt;되어 새로운 인덱스에 쓰기를 해야 이전 인덱스의 분할이 가능합니다.&lt;/p&gt;
+&lt;h2&gt;설명&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index-api-desc&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index-api-desc&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;분할 인덱스 API는 기존 인덱스의 기본 샤드를 두개 또는 그이상으로 분할하여 새로운 인덱스를 만들 수 있게 합니다.&lt;/p&gt;
+&lt;p&gt;인덱스를 분할할 수 있는 횟수(원래 샤드가 분할하여 변경되는 샤드 수)는 &lt;code&gt;index.number_of_routing_shards&lt;/code&gt; 설정으로 결정됩니다.
+라우팅 샤드의 수는 일관된 해싱으로 문서를 내부적으로 분산하도록 하는 해싱 공간을 정의합니다.
+예로, 5개 샤드를 가진 인덱스가 &lt;code&gt;number_of_routing_shards&lt;/code&gt;를 &lt;code&gt;30&lt;/code&gt; (&lt;code&gt;5 x 2 x 3&lt;/code&gt;)으로 설정하면 &lt;code&gt;2&lt;/code&gt; 또는 &lt;code&gt;3&lt;/code&gt;의 배수로 나뉘게 됩니다.
+다시 설명하면 아래와 같이 분산됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt; &amp;gt; &lt;code&gt;10&lt;/code&gt; &amp;gt; &lt;code&gt;30&lt;/code&gt; (2로 분할 후 3으로 분할)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt; &amp;gt; &lt;code&gt;15&lt;/code&gt; &amp;gt; &lt;code&gt;30&lt;/code&gt; (3으로 분할 후 2로 분할)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt; &amp;gt; &lt;code&gt;30&lt;/code&gt; (6으로 분할)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;index.number_of_routing_shards&lt;/code&gt;는 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-modules-settings&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;정적 인덱스 설정&lt;/a&gt; 입니다.
+따라서 &lt;code&gt;index.number_of_routing_shards&lt;/code&gt;의 설정은 인덱스 생성 시점 또는 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;종료된 인덱스&lt;/a&gt;에서 가능합니다.&lt;/p&gt;
+&lt;h3&gt;인덱스 생성 예제&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;인덱스-생성-예제&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9d%b8%eb%8d%b1%ec%8a%a4-%ec%83%9d%ec%84%b1-%ec%98%88%ec%a0%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;아래의 [인덱스 생성 API]는 &lt;code&gt;my-index-000001&lt;/code&gt; 인덱스를 &lt;code&gt;index.number_of_routing_shards&lt;/code&gt;를 30으로 설정하여 생성하는 것 입니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PUT /my-index-000001
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;s2&#34;&gt;&amp;#34;number_of_routing_shards&amp;#34;&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;index.number_of_routing_shards&lt;/code&gt; 설정의 기본값은 원본 인덱스의 기본 샤드의 개수에 종속됩니다.
+기본값은 최대 1024의 샤드를 2배수로 분할할 수 있도록 고안되어있습니다.
+그러나, 기본 샤드의 원래 개수를 고려해야 합니다.
+예로 들면, 5개의 기본샤드로 생성된 인덱스는 10, 20, 40, 80, 160, 320 또는 최대 640 샤드로 분할(단일 분할 또는 다중 분할) 될 수 있습니다.&lt;/p&gt;
+&lt;p&gt;만약 원래 인덱스가 한개의 샤드 (또는 다중-샤드 인덱스에서 단일 기본샤드로 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-shrink-index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;축소&lt;/a&gt;된 것)를 가지고 있는 경우, 1보다 큰 임의의 샤드 수로 분할될 수 있습니다.
+라우팅 샤드의 기본값 속성은 새로 분할된 인덱스에 적용이 가능합니다.&lt;/p&gt;
+&lt;h3&gt;분할 동작 원리&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;how-split-works&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#how-split-works&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;분할 동작은 다음과 같습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;대상인덱스와 동일한 정의를 가지지만 더 큰수의 기본 샤드를 설정할 수 있는 새로운 인덱스를 생성합니다.&lt;/li&gt;
+&lt;li&gt;대상인덱스에서 신규인덱스로 세그먼트를 하드링크합니다. (만약 파일 시스템이 하드링크를 지원하지 않으면 처리하는데 시간이 좀더 걸리지만 새로운 인덱스로 모든 세그먼트를 복사합니다)&lt;/li&gt;
+&lt;li&gt;하위 수준의 파일이 생성되면 다른 샤드에 속해있는 문서를 삭제하기 위해 모든 문서를 다시 해싱합니다.&lt;/li&gt;
+&lt;li&gt;다시 오픈할 닫힌 인덱스처럼 신규 인덱스를 복구합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;왜 엘라스틱서치가 증분 재샤딩을 지원하지 않을까?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;incremental-resharding&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#incremental-resharding&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;N&lt;/code&gt; 샤드에서 &lt;code&gt;N+1&lt;/code&gt; 샤드로 확장되는, 일명 증분 재샤딩은 많은 키-값 저장소에서 지원되는 기능입니다.
+새로운 샤드를 추가하고 새로운 데이터를 이 샤드로 저장하는 것은 선택지가 아닙니다.
+이런 환경에서는 인덱싱 병목이 발생하고 조회/삭제/갱신 요청에 필요한 주어진 &lt;code&gt;_id&lt;/code&gt;를 가지고 문서가 어떤 샤드에 속해있는지 알아내는 것이 더 복잡해집니다.
+따라서 다른 해싱 스키마를 가지고 기존 데이터를 재분배가 필요하다는 것 입니다.&lt;/p&gt;
+&lt;p&gt;키-값 저장소에서 이것을 효율적으로 하기 위해 일반적으로 사용되는 방법은 일관된 해싱을 사용하는 것 입니다.
+일반된 해싱은 샤드의 수를 &lt;code&gt;N&lt;/code&gt;에서 &lt;code&gt;N+1&lt;/code&gt;로 증가시킬 때 재할당을 위해 &lt;code&gt;1/N&lt;/code&gt; 번째의 키만 있으면 됩니다.
+그렇지만 엘라스틱서치의 저장 단위인 샤드는 루씬 인덱스 입니다.
+검색기반의 데이터 구조이기 때문에 문서의 5%에 불과하더라도 루씬 인덱스의 상당부분을 차지하고 이를 삭제하고 다른 샤드에 인덱싱하는 것은 보통 키-값 저장소보다 훨씬 더 높은 비용이 발생합니다.
+위 절에서 설명한 대로 샤드 수를 늘릴 때 이 비용은 곱셈 요소기반 합리적으로 유지됩니다.
+이를 통해 엘라스틱서치는 분할을 로컬로 수행할 수 있으며 결과적으로 이동이 필요한 문서를 다시 색인화하는 대신 인덱스 수준에서 분할을 수행할 수 있을 뿐 아니라 효과적인 파일 복사를 위해 하드링크를 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;추가만 되는 데이터의 경우, 좀더 유연하게 새로운 인덱스를 생성하고 데이터를 저장합니다. 그리고 과거와 신규 데이터에 대한 읽기 연산수행을 위하여 별칠을 추가하는 것 입니다.
+과거와 신규 인덱스가 각기 &lt;code&gt;M&lt;/code&gt;과 &lt;code&gt;N&lt;/code&gt; 샤드를 가지고 있을 경우 &lt;code&gt;M+N&lt;/code&gt; 샤드를 가지는 인덱스를 검색하는 것과 비교하여 오버헤드가 없습니다.&lt;/p&gt;
+&lt;h3&gt;인덱스 분할&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;my_source_indes&lt;/code&gt;를 새로운 &lt;code&gt;my_target_index&lt;/code&gt;로 분할 하는 경우 아래와 같이 요청합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST /my_source_index/_split/my_target_index
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;index.number_of_shards&amp;#34;&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;위 요청은 타겟 인덱스가 클러스터에 추가된 즉시 결과를 반환하며 분할 동작이 시작하는 것을 기다리지는 않습니다.&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      &lt;p&gt;인덱스는 아래의 요건이 모두 만족하면 분할동작을 시작합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;타겟 인덱스가 존재하지 않습니다.&lt;/li&gt;
+&lt;li&gt;소스 인덱스는 타겟 인덱스보다 적은 기본 샤드를 가집니다.&lt;/li&gt;
+&lt;li&gt;타겟 인덱스의 기본 샤드수는 소스 인덱스의 기본 샤드수의 배수가 되어야합니다.&lt;/li&gt;
+&lt;li&gt;분할 동작을 처리하는 노드는 기존 인덱스의 복제본을 만들기 위해 충분한 디스크 공간이 있어야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;_split&lt;/code&gt; API는 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;인덱스 생성 API&lt;/a&gt;와 유사하며 타겟 인덱스의 &lt;code&gt;settings&lt;/code&gt;와 &lt;code&gt;aliases&lt;/code&gt; 매개변수를 받습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST /my_source_index/_split/my_target_index
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;settings&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;index.number_of_shards&amp;#34;&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;aliases&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;my_search_indices&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;분할처리 모니터링&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;monitor-split&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#monitor-split&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;분할 처리는 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-recovery.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;_cat 복구&lt;/code&gt; API&lt;/a&gt;를 사용하여 모니터링하거나 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;cluster 상태&lt;/code&gt; API&lt;/a&gt;를 가지고 &lt;code&gt;wait_for_status&lt;/code&gt; 매개변수를 &lt;code&gt;yellow&lt;/code&gt;로 설정하여 모든 기본 샤드가 할당될 때까지 대기할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;_split&lt;/code&gt; API는 어떤 샤드든 할당되기 전에 대상 인덱스가 클러스터 상태에 추가되면 바로 결과를 반환합니다.
+이 시점에는 모든 샤드가 &lt;code&gt;unassigned&lt;/code&gt; 상태에 있습니다.
+다른 이유로 대상 인덱스가 할당되지 않으면, 기본 샤드는 해당 노드에 할당될 수 있을 때까지 &lt;code&gt;unassigned&lt;/code&gt;로 남아있습니다.&lt;/p&gt;
+&lt;p&gt;기본 샤드가 할당되면 상태는 &lt;code&gt;initializing&lt;/code&gt; 상태로 전환되며 분할 처리가 시작됩니다.
+분할 동작이 완료되면 샤드는 &lt;code&gt;active&lt;/code&gt; 상태가 됩니다.
+이때부터 엘라스틱서치는 복제본 할당을 시작하고 기본 샤드를 다른 노드에 재배치를 고려하게 됩니다.&lt;/p&gt;
+&lt;h3&gt;활성 샤드 대기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-wait-active-shards&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-wait-active-shards&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;분할 동작은 샤드를 분할하기 위해 새로운 인덱스를 생성하기 때문에 인덱스 생성의 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html#create-index-wait-for-active-shards&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;샤드 활성 대기&lt;/a&gt; 설정이 인덱스 분할 동작에도 적용 가능합니다.&lt;/p&gt;
+&lt;h2&gt;경로 매개변수&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index-api-path-params&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index-api-path-params&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;&lt;code&gt;&amp;lt;index&amp;gt;&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;index&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#index&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(필수, 문자열) 분할하고자 하는 소스 인덱스명&lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;&amp;lt;target-index&amp;gt;&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;target-index&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#target-index&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(필수, 문자열) 생성할 대상 인덱스명&lt;/p&gt;
+&lt;p&gt;인덱스명은 아래 규칙을 따라야 합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;소문자만 가능&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\&lt;/code&gt;, &lt;code&gt;/&lt;/code&gt;, &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, &lt;code&gt;&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;|&lt;/code&gt;, &lt;code&gt; &lt;/code&gt;(공백), &lt;code&gt;,&lt;/code&gt;, &lt;code&gt;#&lt;/code&gt; 불가&lt;/li&gt;
+&lt;li&gt;7.0 이전버전은 콜론(&lt;code&gt;:&lt;/code&gt;)이 가능하나 7.0 이상은 더이상 사용되지 않아 지원되지 않음&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt;, &lt;code&gt;_&lt;/code&gt;, &lt;code&gt;+&lt;/code&gt;로 시작하지 않음&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt;, &lt;code&gt;..&lt;/code&gt;가 될 수 없음&lt;/li&gt;
+&lt;li&gt;255 바이트가 될 수 없음 (바이트이므로 멀티바이트 문자열에서는 255글자보다 빨리 초과됨을 참고)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-hidden&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;숨김 인덱스&lt;/a&gt;와 플러그인에서 관리하는 내부 인덱스를 제외하고 &lt;code&gt;.&lt;/code&gt;로 시작하는 이름은 더이상 사용되지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;쿼리 매개변수&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index-api-query-params&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index-api-query-params&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;&lt;code&gt;wait_for_active_shards&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;wait_for_active_shards&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#wait_for_active_shards&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(선택, 문자열) 작업을 처리하기 전에 활성화되어야하는 샤드 복사본의 수 입니다.
+&lt;code&gt;all&lt;/code&gt; 또는 인덱스의 전체 샤드 수 까지의 양의 정수로 설정합니다. (&lt;code&gt;number_of_replicas+1&lt;/code&gt;)
+기본값은 1, 기본 샤드 입니다.&lt;/p&gt;
+&lt;p&gt;자세한 것은 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html#index-wait-for-active-shards&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;활성 샤드&lt;/a&gt;를 참고하세요.&lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;master_timeout&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;master_timeout&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#master_timeout&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(선택, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;시간단위&lt;/a&gt;) 마스터 노드에 접속대기할 시간.
+타임아웃이 초과되기 전까지 응답이 없으면 요청은 실패하고 오류를 반환합니다.
+기본값은 &lt;code&gt;30s&lt;/code&gt; 입니다.&lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;timeout&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;timeout&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#timeout&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(선택, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;시간단위&lt;/a&gt;) 응답을 기다리는 시간.
+타임아웃이 초과되기 전까지 응답이 없으면 요청은 실패하고 오류를 반환합니다.
+기본값은 &lt;code&gt;30s&lt;/code&gt; 입니다.&lt;/p&gt;
+&lt;h2&gt;요청 본문&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;split-index-api-request-body&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#split-index-api-request-body&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;&lt;code&gt;aliases&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;aliases&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#aliases&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(선택, 객체의 객체) 결과 인덱스의 별칭&lt;/p&gt;
+&lt;details class=&#34;last-of-type:hx-mb-0 hx-rounded-lg hx-bg-neutral-50 dark:hx-bg-neutral-800 hx-p-2 hx-mt-4 hx-group&#34; &gt;
+  &lt;summary class=&#34;hx-flex hx-items-center hx-cursor-pointer hx-select-none hx-list-none hx-p-1 hx-rounded hx-transition-colors hover:hx-bg-gray-100 dark:hover:hx-bg-neutral-800 before:hx-mr-1 before:hx-inline-block before:hx-transition-transform before:hx-content-[&#39;&#39;] dark:before:hx-invert rtl:before:hx-rotate-180 group-open:before:hx-rotate-90&#34;&gt;
+    &lt;strong class=&#34;hx-text-lg&#34;&gt;&lt;code&gt;aliases&lt;/code&gt; 객체의 속성&lt;/strong&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;hx-p-2 hx-overflow-hidden&#34;&gt;
+    &lt;h4&gt;&lt;code&gt;&amp;lt;alias&amp;gt;&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;alias&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#alias&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(필수, 객체) 키는 별칭명. 인덱스 별칭이름은 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;날짜 계산&lt;/a&gt;을 지원합니다.&lt;/p&gt;
+&lt;p&gt;객체의 본문은 별칭의 옵션을 포함합니다.
+비어있는 객체도 지원합니다.&lt;/p&gt;
+&lt;details class=&#34;last-of-type:hx-mb-0 hx-rounded-lg hx-bg-neutral-50 dark:hx-bg-neutral-800 hx-p-2 hx-mt-4 hx-group&#34; &gt;
+  &lt;summary class=&#34;hx-flex hx-items-center hx-cursor-pointer hx-select-none hx-list-none hx-p-1 hx-rounded hx-transition-colors hover:hx-bg-gray-100 dark:hover:hx-bg-neutral-800 before:hx-mr-1 before:hx-inline-block before:hx-transition-transform before:hx-content-[&#39;&#39;] dark:before:hx-invert rtl:before:hx-rotate-180 group-open:before:hx-rotate-90&#34;&gt;
+    &lt;strong class=&#34;hx-text-lg&#34;&gt;&lt;code&gt;&amp;lt;alias&amp;gt;&lt;/code&gt;의 속성&lt;/strong&gt;
+  &lt;/summary&gt;
+  &lt;div class=&#34;hx-p-2 hx-overflow-hidden&#34;&gt;
+    &lt;h4&gt;&lt;code&gt;filter&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;filter&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#filter&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(선택, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;쿼리 DSL 객체&lt;/a&gt;) 별칭이 접근할 수 있는 제한된 문서에 사용될 쿼리&lt;/p&gt;
+&lt;h4&gt;&lt;code&gt;index_routing&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;index_routing&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#index_routing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(선택, 문자열) 인덱싱 동작을 특정 샤드로 라우팅할 때 사용되는 값.
+지정되면 인덱싱 동작에는 &lt;code&gt;routing&lt;/code&gt; 값을 덮어씁니다.&lt;/p&gt;
+&lt;h4&gt;&lt;code&gt;is_hidden&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;is_hidden&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#is_hidden&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(선택, 부울) &lt;code&gt;true&lt;/code&gt; 이면 별칭은 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#multi-hidden&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;숨겨집니다.&lt;/a&gt;
+기본값은 &lt;code&gt;false&lt;/code&gt; 입니다.
+별칭의 모든 인덱스는 동일한 &lt;code&gt;is_hidden&lt;/code&gt; 값을 가져야합니다.&lt;/p&gt;
+&lt;h4&gt;&lt;code&gt;is_write_index&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;is_write_index&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#is_write_index&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(선택, 부울) &lt;code&gt;true&lt;/code&gt; 이면, 인덱스는 별칭의 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/aliases.html#write-index&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;쓰기 인덱스&lt;/a&gt;가 됩니다.
+기본값은 &lt;code&gt;false&lt;/code&gt; 입니다.&lt;/p&gt;
+&lt;h4&gt;&lt;code&gt;routing&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;routing&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#routing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(선택, 문자열) 인덱싱과 검색 동작을 특정 샤드로 라우팅할 때 사용되는 값.&lt;/p&gt;
+&lt;h4&gt;&lt;code&gt;search_routing&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;search_routing&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#search_routing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;(선택, 문자열) 검색 동작을 특정 샤드로 라우팅할 때 사용되는 값.
+지정되면 검색 동작에는 &lt;code&gt;routing&lt;/code&gt; 값을 덮어씁니다.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+&lt;h3&gt;&lt;code&gt;settings&lt;/code&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;settings&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#settings&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;(선택, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-modules-settings&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;인덱스 설정 객체&lt;/a&gt;) 대상 인덱스에 대한 구성 옵션.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-modules-settings&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;인덱스 설정&lt;/a&gt;을 참고하세요.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

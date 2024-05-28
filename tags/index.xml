@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – Tags</title>
+    <link>https://blog.oofbird.me/tags/</link>
+    <description>Recent content in Tags on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    
+	  <atom:link href="https://blog.oofbird.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

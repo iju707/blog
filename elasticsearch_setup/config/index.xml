@@ -1,0 +1,742 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – Elasticsearch 구성하기</title>
+    <link>https://blog.oofbird.me/elasticsearch_setup/config/</link>
+    <description>Recent content in Elasticsearch 구성하기 on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Wed, 01 Nov 2023 01:48:00 +0900</lastBuildDate>
+    
+	  <atom:link href="https://blog.oofbird.me/elasticsearch_setup/config/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>중요 엘라스틱서치 구성</title>
+      <link>https://blog.oofbird.me/elasticsearch_setup/config/important-settings/</link>
+      <pubDate>Wed, 01 Nov 2023 01:48:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/elasticsearch_setup/config/important-settings/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;엘라스틱서치는 시작하는데 아주 작은 설정을 요구하지만 운영환경에서 클러스터를 구성하는데 &lt;strong&gt;필수로&lt;/strong&gt; 고려해야될 다수의 설정이 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95&#34; &gt;경로 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%aa%85-%ec%84%a4%ec%a0%95&#34; &gt;클러스터명 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%eb%85%b8%eb%93%9c%eb%aa%85-%ec%84%a4%ec%a0%95&#34; &gt;노드명 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%98%b8%ec%8a%a4%ed%8a%b8-%ec%84%a4%ec%a0%95&#34; &gt;네트워크 호스트 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%eb%94%94%ec%8a%a4%ec%bb%a4%eb%b2%84%eb%a6%ac-%ec%84%a4%ec%a0%95&#34; &gt;디스커버리 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%ed%9e%99%ed%81%ac%ea%b8%b0-%ec%84%a4%ec%a0%95&#34; &gt;힙크기 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#jvm-%ed%9e%99%eb%8d%a4%ed%94%84-%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95&#34; &gt;JVM 힙덤프 경로 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gc-%eb%a1%9c%ea%b9%85-%ec%84%a4%ec%a0%95&#34; &gt;GC 로깅 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%ec%9e%84%ec%8b%9c-%eb%94%94%eb%a0%89%ed%84%b0%eb%a6%ac-%ec%84%a4%ec%a0%95&#34; &gt;임시 디렉터리 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#jvm-%ec%b9%98%eb%aa%85%ec%a0%81-%ec%98%a4%eb%a5%98%eb%a1%9c%ea%b7%b8-%ec%84%a4%ec%a0%95&#34; &gt;JVM 치명적 오류로그 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%b0%b1%ec%97%85&#34; &gt;클러스터 백업&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.elastic.co/cloud/elasticsearch-service/signup?page=docs&amp;amp;placement=docs-body&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Elastic Cloud&lt;/a&gt; 서비스에서 이러한 설정을 자동으로 구성하며 기본적으로 운영환경에 바로 사용하 수 있도록 클러스터를 만들어줍니다.&lt;/p&gt;
+&lt;h2&gt;경로 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;경로-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;엘라스틱서치는 인덱싱된 인덱스 데이터와 스트림 데이터를 &lt;code&gt;data&lt;/code&gt; 디렉터리에 저장합니다.
+클러스터 상태 및 동작 등의 정보를 포함한 어플리케이션 로그를 &lt;code&gt;logs&lt;/code&gt; 디렉터리에 저장합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;macOS &lt;code&gt;.tar.gz&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Linux &lt;code&gt;.tar.gz&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Windows &lt;code&gt;.zip&lt;/code&gt;&lt;/a&gt; 설치에서는 &lt;code&gt;data&lt;/code&gt;와 &lt;code&gt;logs&lt;/code&gt;가 &lt;code&gt;$ES_HOME&lt;/code&gt;의 하위 디렉터리로 기본설정 되어있습니다.
+그러나 &lt;code&gt;$ES_HOME&lt;/code&gt;의 파일은 업그레이드때 삭제될 가능성이 있습니다.&lt;/p&gt;
+&lt;p&gt;운영환경에서 &lt;code&gt;elasticsearch.yml&lt;/code&gt;의 &lt;code&gt;path.data&lt;/code&gt;와 &lt;code&gt;path.logs&lt;/code&gt;를 &lt;code&gt;$ES_HOME&lt;/code&gt; 밖으로 설정하길 권장합니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Docker&lt;/a&gt;, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt;, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RPM&lt;/a&gt; 패키지로 설치한 경우 기본적으로 &lt;code&gt;$ES_HOME&lt;/code&gt;의 밖 위치에서 데이터와 로그를 기록합니다.&lt;/p&gt;
+&lt;p&gt;플랫폼에 따라 &lt;code&gt;path.data&lt;/code&gt;와 &lt;code&gt;path.logs&lt;/code&gt; 값이 다르게 지원됩니다.&lt;/p&gt;
+&lt;div class=&#34;hx-mt-4 hx-flex hx-w-max hx-min-w-full hx-border-b hx-border-gray-200 hx-pb-px dark:hx-border-neutral-800&#34;&gt;&lt;button
+      class=&#34;tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white&#34;
+      role=&#34;tab&#34;
+      type=&#34;button&#34;
+      aria-controls=&#34;tabs-panel-0&#34;
+      aria-selected=&#34;true&#34;
+      tabindex=&#34;0&#34;
+      data-state=&#34;selected&#34;
+    &gt;Unix 시스템&lt;/button&gt;&lt;button
+      class=&#34;tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white&#34;
+      role=&#34;tab&#34;
+      type=&#34;button&#34;
+      aria-controls=&#34;tabs-panel-1&#34;
+      
+      
+      
+    &gt;Windows&lt;/button&gt;&lt;/div&gt;
+&lt;div&gt;
+  
+&lt;div
+  class=&#34;tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block&#34;
+  id=&#34;tabs-panel-0&#34;
+  role=&#34;tabpanel&#34;
+  tabindex=&#34;0&#34;
+  data-state=&#34;selected&#34;
+&gt;
+  &lt;p&gt;리눅스와 macOS 설치는 Unix 스타일 경로를 지원합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/var/data/elasticsearch&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;logs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/var/log/elasticsearch&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div
+  class=&#34;tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block&#34;
+  id=&#34;tabs-panel-1&#34;
+  role=&#34;tabpanel&#34;
+  
+  
+&gt;
+  &lt;p&gt;Windows 설치는 이스케이프된 백슬래시와 DOS 경로를 지원합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\\Elastic\\Elasticsearch\\data&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;logs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\\Elastic\\Elasticsearch\\logs&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      &lt;p&gt;절대 데이터 디렉터리안을 수정하거나 안의 내용을 방해하는 프로세스를 실행하면 안됩니다.
+엘라스틱서치가 아닌 다른 것이 데이터 디렉터리의 내용을 수정한다면, 엘라스틱서치는 오류가 발생하여 손상이나 데이터 불일치가 보고되거나 올바르게 작동하긴 하지만 일부 데이터가 손실될 수 있습니다.&lt;/p&gt;
+&lt;p&gt;데이터 디렉터리 자체를 파일시스템 백업으로 수행하지 마세요.
+대신, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;스냅샷과 복구&lt;/a&gt;를 활용하여 안전하게 백업하세요.&lt;/p&gt;
+&lt;p&gt;데이터 디렉터리에 바이러스 검사를 수행하지 마세요.
+바이러스 검사기가 엘라스틱서치의 정상작동을 막고 데이터 디렉터리의 내용을 수정할 수 있습니다.
+데이터 디렉터리에는 실행파일이 없으므로 거짓된 긍정만 발견될 수 있습니다.&lt;/p&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;다중 데이터 경로&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;다중-데이터-경로&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      7.13.0부터 더이상 사용되지 않음
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;필요하다면, &lt;code&gt;path.data&lt;/code&gt;에 다중경로를 설정할 수 있습니다.
+엘라스틱서치는 모든 제공되는 경로 전반적으로 노드의 데이터를 저장하지만 각각 샤드는 동일한 경로에 저장합니다.&lt;/p&gt;
+&lt;p&gt;엘라스틱서치는 노드의 데이터 경로에 샤드의 균형을 맞추지는 않습니다.
+단일 경로에 높은 디스크 사용률은 노드 전체에 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cluster.html#disk-based-shard-allocation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;높은 디스크 사용량 워터마크&lt;/a&gt;를 발생시킵니다.
+발생된다면 엘라스틱서치는 해당 노드의 다른 경로에 충분한 디스크 용량이 있더라도 샤드를 추가하지 않습니다.
+추가적인 디스크 공간이 필요하다면, 추가 데이터 경로보다는 신규 노드를 추천합니다.&lt;/p&gt;
+&lt;div class=&#34;hx-mt-4 hx-flex hx-w-max hx-min-w-full hx-border-b hx-border-gray-200 hx-pb-px dark:hx-border-neutral-800&#34;&gt;&lt;button
+      class=&#34;tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white&#34;
+      role=&#34;tab&#34;
+      type=&#34;button&#34;
+      aria-controls=&#34;tabs-panel-0&#34;
+      aria-selected=&#34;true&#34;
+      tabindex=&#34;0&#34;
+      data-state=&#34;selected&#34;
+    &gt;Unix 시스템&lt;/button&gt;&lt;button
+      class=&#34;tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white&#34;
+      role=&#34;tab&#34;
+      type=&#34;button&#34;
+      aria-controls=&#34;tabs-panel-1&#34;
+      
+      
+      
+    &gt;Windows&lt;/button&gt;&lt;/div&gt;
+&lt;div&gt;
+  
+&lt;div
+  class=&#34;tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block&#34;
+  id=&#34;tabs-panel-0&#34;
+  role=&#34;tabpanel&#34;
+  tabindex=&#34;0&#34;
+  data-state=&#34;selected&#34;
+&gt;
+  &lt;p&gt;리눅스와 macOS 설치는 &lt;code&gt;path.data&lt;/code&gt;에 Unix 스타일의 다중 경로를 지원합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;/mnt/elasticsearch_1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;/mnt/elasticsearch_2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;/mnt/elasticsearch_3&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div
+  class=&#34;tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block&#34;
+  id=&#34;tabs-panel-1&#34;
+  role=&#34;tabpanel&#34;
+  
+  
+&gt;
+  &lt;p&gt;Windows 설치는 &lt;code&gt;path.data&lt;/code&gt;에 DOS의 다중 경로를 지원합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\\Elastic\\Elasticsearch_1&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;E:\\Elastic\\Elasticsearch_2&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;F:\\Elastic\\Elasticsearch_3&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
+
+&lt;h2&gt;다중 데이터 경로에서 마이그레이션하기&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;다중-데이터-경로에서-마이그레이션하기&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c%ec%97%90%ec%84%9c-%eb%a7%88%ec%9d%b4%ea%b7%b8%eb%a0%88%ec%9d%b4%ec%85%98%ed%95%98%ea%b8%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;다중 데이터 경로 지원은 7.13부터 사용되지 않으며 추후 릴리즈에서 삭제될 예정입니다.&lt;/p&gt;
+&lt;p&gt;다중 데이터 경로대신 RAID와 같은 하드웨어 가상화 계층 또는 리눅스에서 논리 볼륨 관리자(LVM, Logical Volume Manager)나 윈도우의 저장소 공간(Storage Spaces)와 같은 소프트웨어 가상화 계층으로 다수의 디스크를 묶은 파일시스템을 생성할 수 있습니다.
+하나의 장비에서 다수의 데이터 경로를 사용하고 싶다면 필히 데이터 경로마다 노드를 실행해야합니다.&lt;/p&gt;
+&lt;p&gt;현재 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/high-availability-cluster-design.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;고가용성 클러스터&lt;/a&gt;에 다중 데이터 경로를 사용하고 있다면 각각 노드에 단일 경로를 사용하도록 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/restart-cluster.html#restart-cluster-rolling&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;롤링 시작&lt;/a&gt;과 유사한 절차를 사용하여 중단시간 없이 설정을 마이그레이션 해야합니다.
+각각 노드가 차례로 중단 되면서 단일 데이터 경로로 구성된 하나이상의 노드로 교체됩니다.
+더 자세한 것은 현재 다중 데이터 경로를 가지고 있는 각각의 노드에 대하여 아래 프로세스를 수행해야 합니다.
+원칙적으로 이 마이그레이션을 8.0으로 롤링업그레이드 할 때 가능하나, 단일 데이터 경로 구성 후 업그레이드 시작을 권장합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;장애에 대비하여 데이터보호를 위해 스냅샷을 수행합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;선택적으로, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/modules-cluster.html#cluster-shard-allocation-filtering&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;할당 필터&lt;/a&gt;를 사용하여 대상 노드를 데이터에서 떼어놓습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PUT _cluster/settings
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;persistent&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;cluster.routing.allocation.exclude._name&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;target-node-name&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/cat-allocation.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;할당 보기 API&lt;/a&gt;를 통해 이 데이터 마이그레이션 처리과정을 추적할 수 있습니다.
+일부 샤드가 마이그레이션이 안되면 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/cluster-allocation-explain.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;클러스터 할당 설명 API&lt;/a&gt;를 통해 왜 안되는지 확인이 가능합니다.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;대상 노드 중단을 포함하여 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/restart-cluster.html#restart-cluster-rolling&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;롤링 시작 프로세스&lt;/a&gt;의 단계를 따르세요.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클러스터의 상태가 &lt;code&gt;yello&lt;/code&gt;나 &lt;code&gt;green&lt;/code&gt;이면 모든 샤드의 복제가 클러스터내 적어도 다른 노드 하나에 할당 되었다는 것 입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;적용이 되면, 이전 단계에서 적용한 할당 필터를 제거합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PUT _cluster/settings
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s2&#34;&gt;&amp;#34;persistent&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;cluster.routing.allocation.exclude._name&amp;#34;&lt;/span&gt;: null
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 경로의 내용를 삭제하여 중지된 노드가 보유한 데이터를 폐기해야합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;저장소를 재구성합니다. 예로, LVM이나 저장소 공간을 사용한 단일 파일시스템으로 디스크를 결합합니다. 재구성된 저장소에 보유한 데이터를 위한 충분한 공간이 있는지 확인합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;elasitcsearch.yml&lt;/code&gt; 파일의 &lt;code&gt;path.data&lt;/code&gt; 설정을 조정하여 노드를 재구성합니다. 필요하면 분리된 데이터 경로를 &lt;code&gt;path.data&lt;/code&gt;로 설정하여 추가적인 노드를 설치합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;새 노드를 시작하고 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/restart-cluster.html#restart-cluster-rolling&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;롤링 시작 절차&lt;/a&gt;의 나머지를 따라합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클러스터의 상태가 &lt;code&gt;green&lt;/code&gt;임을 확인합니다. 그럼 모든 샤드가 할당되었습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;다른 방법으로는 단일 데이터 경로 노드를 클러스터에 추가하고 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/8.10/modules-cluster.html#cluster-shard-allocation-filtering&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;할당 필터&lt;/a&gt;를 사용하여 새로운 노드에 데이터 전반을 마이그레이션하고 클러스터에서 이전 노드를 삭제합니다.
+이 방법은 순간적으로 클러스터의 크기를 두배로 사용되기 때문에 가능한 용량이 있는지 확인하고 진행해야합니다.&lt;/p&gt;
+&lt;p&gt;현재 다중 데이터 경로를 사용하고 클러스터의 가용성이 높지 않은 경우 스냅샷을 만들고 원하는 구성으로 클러스터를 생성한 뒤 복원하여 더 이상 사용하지 않는 구성으로 마이그레이션할 수 있습니다.&lt;/p&gt;
+&lt;h2&gt;클러스터명 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;클러스터명-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%aa%85-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;노드는 클러스터의 다른 모든 노드와 동일한 &lt;code&gt;cluster.name&lt;/code&gt;을 공유할때만 합류할 수 있습니다. 기본값은 &lt;code&gt;elasticsearch&lt;/code&gt; 입니다. 클러스터 목적에 따라 적절한 이름으로 변경도 가능합니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;cluster.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;logging-prod&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      절대로 다른 환경에서 동일한 클러스터명을 사용하지 마세요.
+그렇지 않으면 원치않게 노드가 다른 클러스터로 합류할 수 있습니다.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ℹ️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      클러스터명의 변경은 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-cluster.html#restart-cluster-full&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;클러스터 전체 재시작&lt;/a&gt;이 필요합니다.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;노드명 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;노드명-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%85%b8%eb%93%9c%eb%aa%85-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;엘라스틱서치는 &lt;code&gt;node.name&lt;/code&gt;를 사용해서 엘라스틱서치의 특정 인스턴스에 대한 사람이 읽을 수 있는 식별자 지정이 가능합니다.
+이 이름은 많은 API 응답에 포함됩니다.
+엘라스틱서치가 시작될 때 장치의 호스트명이 기본값으로 설정되나 명시적으로 &lt;code&gt;elasticsearch.yml&lt;/code&gt;에 구성할 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;node.name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;prod-data-2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;네트워크 호스트 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;네트워크-호스트-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%98%b8%ec%8a%a4%ed%8a%b8-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;기본적으로 엘라스틱서치는 &lt;code&gt;127.0.0.1&lt;/code&gt; 또는 &lt;code&gt;[::1]&lt;/code&gt;과 같은 루프백 주소에만 바인딩됩니다.
+이것은 개발 또는 테스트 목적으로 단일 서버에 한개이상의 노드로 클러스터를 실행할때 적합합니다.
+그러나, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/high-availability-cluster-design.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;탄력적인 운영환경 클러스터&lt;/a&gt;는 다른서버의 노드를 포함해야합니다.
+다양한 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;네트워크 설정&lt;/a&gt;이 있지만 보통 필요한 설정은 &lt;code&gt;network.host&lt;/code&gt; 입니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;network.host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;192.168.1.10&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      &lt;code&gt;network.host&lt;/code&gt;의 값을 설정할 때 엘라스틱서치는 개발모드에서 운영모드로 전환된다고 가정하고 시스템 시작 확인의 다수를 경고에서 예외로 변경합니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html#dev-vs-prod&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;개발과 운영 모드&lt;/a&gt;의 차이를 살펴보세요.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;디스커버리 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;디스커버리-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%94%94%ec%8a%a4%ec%bb%a4%eb%b2%84%eb%a6%ac-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;두가지 중요한 디스커버리와 클러스터 형성 설정을 운영에 가기전에 구성해서 클러스터의 노드가 서로를 탐색하고 마스터 노드를 선출할 수 있게 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;discovery.seed_hosts&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;네트워크 구성없이 즉시사용할 경우 엘라스틱서치는 사용가능한 루프백 주소에 바인딩되고 &lt;code&gt;9300&lt;/code&gt;부터 &lt;code&gt;9305&lt;/code&gt;까지 동일한 서버에 다른 노드가 실행중인지 로컬포트를 스캔합니다.
+이 동작으로 다른 구성없이 자동 클러스터링 경험을 제공합니다.&lt;/p&gt;
+&lt;p&gt;다른 호스트의 노드와의 클러스터 형태를 원한다면, &lt;a href=&#34;../#%ea%b3%a0%ec%a0%95%ed%98%95&#34; &gt;정적&lt;/a&gt; &lt;code&gt;discovery.seed_hosts&lt;/code&gt; 설정을 사용합니다.
+이 설정은 [디스커버리 절차]의 시작이 가능한 살아있고 접근가능한 클러스터의 다른 마스터적격 노드 목록을 제공합니다.
+이 설정은 클러스터의 마스터적격 노드의 모든 주소를 YAML 시퀀스나 목록으로 설정됩니다.
+각각의 주소는 IP 주소 또는 DNS를 통해 한개이상의 IP 주소로 변경이 가능한 호스트명으로 구성됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;discovery.seed_hosts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;m&#34;&gt;192.168.1.10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;9300&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;m&#34;&gt;192.168.1.11&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;seeds.mydomain.com&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;l&#34;&gt;ffff:c0a8:10c]:9301&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;포트는 기본값으로 &lt;code&gt;9300&lt;/code&gt;입니다. &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/discovery-hosts-providers.html#built-in-hosts-providers&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;덮어쓸 수 있습니다.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;호스트명이 다수의 IP로 해석이되면, 노드는 확인된 모든 주소에서 다른 노드를 찾으려고 시도합니다.&lt;/li&gt;
+&lt;li&gt;IPv6 주소는 대괄호로 묶여야합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;마스터적격 노드가 고정된 이름 또는 주소가 없을 경우 주소를 동적으로 찾을 수 있도록 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/discovery-hosts-providers.html#built-in-hosts-providers&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;대안 호스트 제공자&lt;/a&gt;를 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cluster.initial_master_nodes&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;엘라스틱서치가 최초 동작시, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-bootstrap-cluster.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;클러스터 부트스트래핑&lt;/a&gt; 절차에서 최초선거의 투표가 집계되는 마스터적격 노드의 집합을 결정합니다.&lt;/p&gt;
+&lt;p&gt;자동-부트스트래핑은 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-quorums.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;잠재적으로 불안정&lt;/a&gt;하기 때문에 운영모드의 새로운 클러스터를 시작할 때 가장 최초선거에서 투표 집계가 되는 마스터적격 노드를 명시적으로 목록화 해야합니다.
+이 목록은 &lt;code&gt;cluster.initial_master_nodes&lt;/code&gt;를 사용하여 설정할 수 있습니다.&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      최초 클러스터 구성이 성공하면 각각 노드 구성의 &lt;code&gt;cluster.initial_master_nodes&lt;/code&gt; 설정을 제거합니다.
+클러스터를 재시작할 때 또는 기존 클러스터에 새로운 노드를 추가할 때 이 설정을 사용하면 안됩니다.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;discovery.seed_hosts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;m&#34;&gt;192.168.1.10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;9300&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;m&#34;&gt;192.168.1.11&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;seeds.mydomain.com&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;l&#34;&gt;ffff:c0a8:10c]:9301&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;cluster.initial_master_nodes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;master-node-a&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;master-node-b&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;master-node-c&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;호스트명이 기본값으로 사용되는 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#node-name&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;node.name&lt;/code&gt;&lt;/a&gt;으로 초기 마스터노드를 식별합니다.
+&lt;code&gt;cluster.initial_master_nodes&lt;/code&gt;의 값에 &lt;code&gt;node.name&lt;/code&gt;가 명확히 일치해야합니다.
+노드명에 &lt;code&gt;master-node-a.example.com&lt;/code&gt;과 같은 정규화된 도메인명(FQDN, Fully-Qualified Domain Name)을 사용한다면 목록에 FQDN을 사용해야합니다.
+반대로, &lt;code&gt;node.name&lt;/code&gt;이 후행 한정자가 없는 순수 호스트이름인 경우 &lt;code&gt;cluster.initial_master_nodes&lt;/code&gt;에서 후행 한정자를 생략해야합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-bootstrap-cluster.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;클러스터 부트스트래핑&lt;/a&gt;과 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-settings.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;디스커버리와 클러스터 형성 설정&lt;/a&gt;을 참고하세요.&lt;/p&gt;
+&lt;h2&gt;힙크기 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;힙크기-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%9e%99%ed%81%ac%ea%b8%b0-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;기본적으로 엘라스틱서치는 JVM 힙크기를 노드의 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html#node-roles&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;역할&lt;/a&gt;과 전체 메모리를 기반으로 자동설정합니다.
+대부분의 운영환경에서는 기본크기를 권장합니다.&lt;/p&gt;
+&lt;p&gt;필요하다면 기본크기를 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-heap-size&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;JVM 힙 크기 설정&lt;/a&gt;으로 설정할 수 있습니다.&lt;/p&gt;
+&lt;h2&gt;JVM 힙덤프 경로 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;jvm-힙덤프-경로-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#jvm-%ed%9e%99%eb%8d%a4%ed%94%84-%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;엘라스틱서치는 기본적으로 데이터 디렉터리에 메모리초과 오류가 발생하면 힙덤프를 받도록 JVM 설정이 되어있습니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RPM&lt;/a&gt;과 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt; 패키지에서 데이터 디렉터리는 &lt;code&gt;/var/lib/elasticsearch&lt;/code&gt;입니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;리눅스와 맥&lt;/a&gt;, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;윈도우&lt;/a&gt; 배포판은 &lt;code&gt;data&lt;/code&gt; 디렉터리가 엘라스틱서치 설치의 상위디렉터리에 위치해있습니다.&lt;/p&gt;
+&lt;p&gt;이 경로가 힙덤프를 받기 적절치 않으면, &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-options&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jvm.options&lt;/code&gt;&lt;/a&gt;의 &lt;code&gt;-XX:HeapDumpPath=...&lt;/code&gt;를 수정합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;디렉터리를 지정하면 JVM이 실행중인 인스턴스의 PID를 기반으로 힙덤프 파일명을 생성합니다.&lt;/li&gt;
+&lt;li&gt;디렉터리 대신 고정된 파일명으로 지정하면 JVM이 메모리초과 오류가 발생해서 힙덤프를 만들 때 파일이 있으면 안됩니다.
+그렇지 않으면 힙덤프는 실패합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;GC 로깅 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;gc-로깅-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#gc-%eb%a1%9c%ea%b9%85-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;엘라스틱서치는 가비지컬렉션(GC) 로그를 활성화합니다.
+&lt;code&gt;jvm.options&lt;/code&gt;에서 구성할 수 있고 엘라스틱서치 로그의 동일 기본경로에 출력됩니다.
+기본 구성은 매 64MB 마다 로그가 순환되고 디스크공간을 최대 2GB 사용합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://openjdk.java.net/jeps/158&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;JEP 158: Unified JVM Logging&lt;/a&gt;에 설명된 것 처럼 명령줄 옵션으로 JVM 로깅을 재구성할 수 있습니다.
+기본 &lt;code&gt;jvm.options&lt;/code&gt; 파일을 직접 변경하지 않으면 엘라스틱서치는 기본 구성에 설정을 추가합니다.
+기본 구성을 비활성화 하려면 &lt;code&gt;-xlog:disable&lt;/code&gt;로 최초 로깅을 비활성화 한 뒤 명령줄 옵션을 적용합니다.
+이렇게 하면 모든 JVM 로깅을 비활성화되기 때문에 사용가능한 옵션을 확인하고 필요한 모든것을 활성화 해야합니다.&lt;/p&gt;
+&lt;p&gt;JEP 원본에 포함되지 않은 많은 옵션은 &lt;a href=&#34;https://docs.oracle.com/en/java/javase/13/docs/specs/man/java.html#enable-logging-with-the-jvm-unified-logging-framework&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;JVM Unified Logging 프레임워크로 로깅활성화&lt;/a&gt;를 참고하세요.&lt;/p&gt;
+&lt;h3&gt;JVM 예제&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;jvm-예제&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#jvm-%ec%98%88%ec%a0%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;몇몇 샘플 옵션과 함께 &lt;code&gt;/opt/my-app/gc.log&lt;/code&gt;로 기본 GC 로그 출력위치를 변경하는 &lt;code&gt;$ES_HOME/config/jvm.options.d/gc.options&lt;/code&gt;파일 예제입니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;# 모든 로그설정을 비활성화 합니다.
+-Xlog:disable
+
+# JEP 158의 기본설정이지만 다음줄과 일치하도록 `uptime` 대신 `utctime`을 사용합니다.
+-Xlog:all=warning:stderr:utctime,level,tags
+
+# 다양한 옵션과 사용자정의 위치로 GC 로깅을 활성화 합니다.
+-Xlog:gc*,gc&amp;#43;age=trace,safepoint:file=/opt/my-app/gc.log:utctime,level,pid,tags:filecount=32,filesize=64m&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;엘라스틱서치 [Docker 컨테이너]가 GC 디버그 로그를 표준 에러(&lt;code&gt;stderr&lt;/code&gt;)로 전송할 수 있도록 구성합니다.
+이를 통해 컨테이너 오케스트레이터가 출력을 다룰 수 있습니다.
+&lt;code&gt;ES_JAVA_OPTS&lt;/code&gt; 환경변수를 사용하면 다음과 같이 지정하세요.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;MY_OPTS=&amp;#34;-Xlog:disable -Xlog:all=warning:stderr:utctime,level,tags -Xlog:gc=debug:stderr:utctime&amp;#34;
+docker run -e ES_JAVA_OPTS=&amp;#34;$MY_OPTS&amp;#34; # etc&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;임시 디렉터리 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;임시-디렉터리-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9e%84%ec%8b%9c-%eb%94%94%eb%a0%89%ed%84%b0%eb%a6%ac-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;엘라스틱서치는 시작스크립트에서 시스템 임시 디렉터리 하위에 바로 개별 임시 디렉터리를 생성하여 사용합니다.&lt;/p&gt;
+&lt;p&gt;몇몇 리눅스 배포판에는 시스템유틸리티가 최근 접근하지 않았으면 &lt;code&gt;/tmp&lt;/code&gt;에 파일과 디렉터리를 청소합니다.
+이 동작은 엘라스틱서치가 동작중일 때 임시 디렉터리를 사용하는 기능이 장기간 사용되지 않으면 개별 임시 디렉터리 또한 삭제된다는 것 입니다.
+이 기능이 나중에 다시 사용되면 개별 임시 디렉터리가 삭제됨으로 문제가 발생할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.deb&lt;/code&gt;나 &lt;code&gt;.rpm&lt;/code&gt; 패키지를 사용하여 엘라스틱서치를 설치하고 &lt;code&gt;systemd&lt;/code&gt; 하위에 실행된다면 개별 임시 디렉터리는 정기적 정리대상에서 제외됩니다.&lt;/p&gt;
+&lt;p&gt;장기간동안 리눅스나 맥의 &lt;code&gt;.tar.gz&lt;/code&gt; 배포판을 실행한 경우 오래된 파일이나 디렉터리가 정리되는 경로 하위말고 다른 위치에 임시 디렉터리 생성을 고려해야합니다.
+이 디렉터리는 엘라스틱서치를 실행한 사용자가 접근할 수 있도록 권한을 설정해야합니다.
+그리고 엘라스틱서치가 실행할 때 &lt;code&gt;$EV_TMDIR&lt;/code&gt; 환경변수로 설정하여 해당 위치를 가리킵니다.&lt;/p&gt;
+&lt;h2&gt;JVM 치명적 오류로그 설정&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;jvm-치명적-오류로그-설정&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#jvm-%ec%b9%98%eb%aa%85%ec%a0%81-%ec%98%a4%eb%a5%98%eb%a1%9c%ea%b7%b8-%ec%84%a4%ec%a0%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;엘라스틱서치는 기본 로깅 디렉터리에 fatal 에러 로그를 작성하도록 JVM을 구성합니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RPM&lt;/a&gt;과 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Debian&lt;/a&gt; 패키지는 이 디렉터리가 &lt;code&gt;/var/log/elasticsearch&lt;/code&gt; 입니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;리눅스와 맥&lt;/a&gt;과 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;윈도우&lt;/a&gt; 배포판의 &lt;code&gt;logs&lt;/code&gt; 디렉터리는 엘라스틱서치 설치의 상위 디렉터리에 위치합니다.&lt;/p&gt;
+&lt;p&gt;세그먼트폴트와 같은 fatal 에러가 발생하면 JVM이 생성하는 로그가 있습니다.
+로그를 받기 경로가 적절치 않다면 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-options&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jvm.options&lt;/code&gt;&lt;/a&gt;의 &lt;code&gt;-XX:ErrorFile=...&lt;/code&gt; 항목을 수정하세요.&lt;/p&gt;
+&lt;h2&gt;클러스터 백업&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;클러스터-백업&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%b0%b1%ec%97%85&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;재해시 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;스냅샷&lt;/a&gt;은 영구적 데이터 손실을 방지합니다.
+&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html#automate-snapshots-slm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;스냅샷 생명주기 관리&lt;/a&gt;는 클러스터의 일반적인 백업을 쉽게 생성하는 방법입니다.
+자세한 정보는 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;스냅샷을 생성&lt;/a&gt;을 참고하세요.&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200&#34;&gt;
+  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;
+        ⚠️
+      &lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;
+      &lt;strong&gt;스냅샷을 만드는 것이 클러스터를 백업하는 안정적이고 지원되는 유일한 방법입니다.&lt;/strong&gt;
+노드의 데이터 디렉터리만 복사하는 것으로 엘라스틱서치 클러스터를 백업할 수 없습니다.
+파일시스템수준 백업으로 데이터를 복구하는 방법을 지원하지 않습니다.
+이러한 백업으로 클러스터를 복구하면 손상, 누락된 파일 또는 기타 데이터 불일치로 보고되어 실패하거나 성공으로 보이나 부분적 데이터 손실이 발생할 수 있습니다.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

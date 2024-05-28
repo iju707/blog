@@ -1,0 +1,50 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – 코드 예제</title>
+    <link>https://blog.oofbird.me/boto3/example/</link>
+    <description>Recent content in 코드 예제 on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://blog.oofbird.me/boto3/example/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Amazon S3 예제</title>
+      <link>https://blog.oofbird.me/boto3/example/s3/</link>
+      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.oofbird.me/boto3/example/s3/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-examples.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-examples.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;아마존 단순 스토리지 서비스 (Amazon S3)는 확장성, 데이터 유효성, 보안, 성능을 제공하는 객체 스토리지 서비스 입니다.&lt;/p&gt;
+&lt;p&gt;이번 절은 AWS SDK for Python을 사용해서 어떻게 Amazon S3 서비스에 접근하는지 보여줍니다.&lt;/p&gt;
+&lt;h2&gt;예제&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;예제&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%98%88%ec%a0%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/creating-buckets&#34; &gt;Amazon S3 버킷&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/uploading-files&#34; &gt;파일 업로드&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/download-file&#34; &gt;파일 다운로드&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/file-transfer&#34; &gt;파일 전송 구성&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/presigned-urls&#34; &gt;사전인증 URL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/bucket-policies&#34; &gt;버킷 정책&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/access-permissions&#34; &gt;접근 권한&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/static-web-host&#34; &gt;아마존 S3 버킷을 정적웹호스트로 사용하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/configuring-buckets&#34; &gt;버킷 CORS 구성&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./s3/privatelink&#34; &gt;아마존 S3의 AWS PrivateLink&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

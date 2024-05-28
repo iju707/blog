@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+<link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
+
+  <title>중요 엘라스틱서치 구성 – OOFBIRD</title>
+  <meta name="description" content="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html
+엘라스틱서치는 시작하는데 아주 작은 설정을 요구하지만 운영환경에서 클러스터를 구성하는데 필수로 고려해야될 다수의 설정이 있습니다.
+경로 설정 클러스터명 설정 노드명 설정 네트워크 호스트 설정 디스커버리 설정 힙크기 설정 JVM 힙덤프 경로 설정 GC 로깅 설정 임시 디렉터리 설정 JVM 치명적 오류로그 설정 클러스터 백업 Elastic Cloud 서비스에서 이러한 설정을 자동으로 구성하며 기본적으로 운영환경에 바로 사용하 수 있도록 클러스터를 만들어줍니다.
+경로 설정 엘라스틱서치는 인덱싱된 인덱스 데이터와 스트림 데이터를 data 디렉터리에 저장합니다." />
+
+  
+    <link rel="canonical" href="https://blog.oofbird.me/elasticsearch_setup/config/important-settings/" itemprop="url" />
+  
+
+  
+
+<meta property="og:title" content="중요 엘라스틱서치 구성" />
+<meta property="og:description" content="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html
+엘라스틱서치는 시작하는데 아주 작은 설정을 요구하지만 운영환경에서 클러스터를 구성하는데 필수로 고려해야될 다수의 설정이 있습니다.
+경로 설정 클러스터명 설정 노드명 설정 네트워크 호스트 설정 디스커버리 설정 힙크기 설정 JVM 힙덤프 경로 설정 GC 로깅 설정 임시 디렉터리 설정 JVM 치명적 오류로그 설정 클러스터 백업 Elastic Cloud 서비스에서 이러한 설정을 자동으로 구성하며 기본적으로 운영환경에 바로 사용하 수 있도록 클러스터를 만들어줍니다.
+경로 설정 엘라스틱서치는 인덱싱된 인덱스 데이터와 스트림 데이터를 data 디렉터리에 저장합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.oofbird.me/elasticsearch_setup/config/important-settings/" /><meta property="article:section" content="elasticsearch_setup" />
+<meta property="article:published_time" content="2023-11-01T01:48:00+09:00" />
+<meta property="article:modified_time" content="2023-11-01T01:48:00+09:00" />
+
+  <meta itemprop="name" content="중요 엘라스틱서치 구성">
+<meta itemprop="description" content="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html
+엘라스틱서치는 시작하는데 아주 작은 설정을 요구하지만 운영환경에서 클러스터를 구성하는데 필수로 고려해야될 다수의 설정이 있습니다.
+경로 설정 클러스터명 설정 노드명 설정 네트워크 호스트 설정 디스커버리 설정 힙크기 설정 JVM 힙덤프 경로 설정 GC 로깅 설정 임시 디렉터리 설정 JVM 치명적 오류로그 설정 클러스터 백업 Elastic Cloud 서비스에서 이러한 설정을 자동으로 구성하며 기본적으로 운영환경에 바로 사용하 수 있도록 클러스터를 만들어줍니다.
+경로 설정 엘라스틱서치는 인덱싱된 인덱스 데이터와 스트림 데이터를 data 디렉터리에 저장합니다."><meta itemprop="datePublished" content="2023-11-01T01:48:00+09:00" />
+<meta itemprop="dateModified" content="2023-11-01T01:48:00+09:00" />
+<meta itemprop="wordCount" content="1583">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="중요 엘라스틱서치 구성"/>
+<meta name="twitter:description" content="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html
+엘라스틱서치는 시작하는데 아주 작은 설정을 요구하지만 운영환경에서 클러스터를 구성하는데 필수로 고려해야될 다수의 설정이 있습니다.
+경로 설정 클러스터명 설정 노드명 설정 네트워크 호스트 설정 디스커버리 설정 힙크기 설정 JVM 힙덤프 경로 설정 GC 로깅 설정 임시 디렉터리 설정 JVM 치명적 오류로그 설정 클러스터 백업 Elastic Cloud 서비스에서 이러한 설정을 자동으로 구성하며 기본적으로 운영환경에 바로 사용하 수 있도록 클러스터를 만들어줍니다.
+경로 설정 엘라스틱서치는 인덱싱된 인덱스 데이터와 스트림 데이터를 data 디렉터리에 저장합니다."/>
+
+    <link rel="preload" href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" as="style" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
+    <link href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" rel="stylesheet" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
+
+
+
+  <link href="/css/custom.min.ec577e35b4d30ea98e216ff7d4f568805fbbc20bcf6f3af8731e34d509c6319a.css" rel="stylesheet" integrity="sha256-7Fd&#43;NbTTDqmOIW/31PVogF&#43;7wgvPbzr4cx401QnGMZo=" />
+
+
+
+  
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6G9FTXBMH1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-6G9FTXBMH1");
+  </script>
+
+
+
+  <script>
+     
+    const defaultTheme = 'system';
+
+    const setDarkTheme = () => {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+    const setLightTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
+    }
+  </script>
+
+  
+</head>
+<body dir="ltr"><div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
+  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
+    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
+        <img class="hx-block dark:hx-hidden" src="/logo.png" alt="OOFBIRD" height="40" width="40" />
+        <img class="hx-hidden dark:hx-block" src="/logo.png" alt="OOFBIRD" height="40" width="40" />
+        <span class="hx-mx-2 hx-font-extrabold hx-inline hx-select-none" title="OOFBIRD">OOFBIRD</span>
+    </a><a
+            title="문서번역"
+            href="/docs"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">문서번역</span>
+          </a><a
+            title="BLOG"
+            href="/blog"
+            
+            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
+          >
+            <span class="hx-text-center">BLOG</span>
+          </a><div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="검색..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+
+          <a class="hx-p-2 hx-text-current" target="_blank" rel="noreferer" href="https://github.com/iju707" title="Github"><svg height=24 fill="currentColor" viewBox="3 3 18 18">
+  <path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path>
+</svg>
+<span class="hx-sr-only">Github</span>
+          </a><button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
+  </nav>
+</div>
+
+  <div class='hx-mx-auto hx-flex max-w-full'>
+    <div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx-fixed hx-inset-0 hx-z-10 hx-bg-black/80 dark:hx-bg-black/60 hx-hidden"></div>
+<aside class="sidebar-container hx-flex hx-flex-col print:hx-hidden md:hx-top-16 md:hx-shrink-0 md:hx-w-64 md:hx-self-start max-md:[transform:translate3d(0,-100%,0)] md:hx-sticky">
+  
+  <div class="hx-px-4 hx-pt-4 md:hx-hidden">
+    <div class="search-wrapper hx-relative md:hx-w-64">
+  <div class="hx-relative hx-flex hx-items-center hx-text-gray-900 contrast-more:hx-text-gray-800 dark:hx-text-gray-300 contrast-more:dark:hx-text-gray-300">
+    <input
+      placeholder="검색..."
+      class="search-input hx-block hx-w-full hx-appearance-none hx-rounded-lg hx-px-3 hx-py-2 hx-transition-colors hx-text-base hx-leading-tight md:hx-text-sm hx-bg-black/[.05] dark:hx-bg-gray-50/10 focus:hx-bg-white dark:focus:hx-bg-dark placeholder:hx-text-gray-500 dark:placeholder:hx-text-gray-400 contrast-more:hx-border contrast-more:hx-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="hx-absolute hx-my-1.5 hx-select-none ltr:hx-right-1.5 rtl:hx-left-1.5 hx-h-5 hx-rounded hx-bg-white hx-px-1.5 hx-font-mono hx-text-[10px] hx-font-medium hx-text-gray-500 hx-border dark:hx-border-gray-100/20 dark:hx-bg-dark/50 contrast-more:hx-border-current contrast-more:hx-text-current contrast-more:dark:hx-border-current hx-items-center hx-gap-1 hx-transition-opacity hx-pointer-events-none hx-hidden sm:hx-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>
+
+  </div>
+  <div class="hextra-scrollbar hx-overflow-y-auto hx-overflow-x-hidden hx-p-4 hx-grow md:hx-h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+    <ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden">
+      
+      
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/elastic/"
+    
+  >Elasticsearch
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/elastic/rest-apis/"
+    
+  >REST API
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a>
+              <div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/elastic/rest-apis/indices-split-index/"
+    
+  >인덱스분할 API
+    </a>
+              
+            </li></ul>
+      </div>
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/"
+    
+  >BLOG
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20240113-logioptions/"
+    
+  >[LogiOptions&#43;] 실행안됨현상 해결
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20231228-vmware-ctrix/"
+    
+  >[VMware] Ctrix workspace 느린현상
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20231028-python-op/"
+    
+  >[Pyhon] 문자열을 연산자로 사용하기
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20231013-sysctl-reload/"
+    
+  >[Linux] 재부팅없이 sysctl 설정 다시읽기(reload)
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20231012-core_autocrlf/"
+    
+  >[Git] Failed to find a valid digest in the &#34;integrity&#34; attribute for resource
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20231012-git-submodule/"
+    
+  >[Git] Submodule이 있는 저장소 Clone 하기
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20230927-postgresql/"
+    
+  >[PostgreSQL] 재시작없이 설정불러오기 (reload configuration without restart)
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20230927-mariadb/"
+    
+  >[MariaDB] 문자열을 날짜로 STR_TO_DATE
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20230923-synology-eac3/"
+    
+  >[Synology] EAC3 코덱 재생하기
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20230923-git-proxy/"
+    
+  >[Git] Proxy 설정하기
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20230921-reactjs/"
+    
+  >[ReactJS] create-react-app의 실행 포트 변경
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/blog/20230921-windows-failover/"
+    
+  >[Windows] Failover Cluster 생성실패 (로그온 실패)
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class="open"><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/elasticsearch_setup/"
+    
+  >Elasticsearch 설정
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/elasticsearch_setup/config/"
+    
+  >Elasticsearch 구성
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a>
+              <div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+    href="/elasticsearch_setup/config/important-settings/"
+    
+  >중요구성
+    </a>
+  
+    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
+              <a
+                href="#%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >경로 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >다중 데이터 경로</a>
+            </li>
+          <li>
+              <a
+                href="#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c%ec%97%90%ec%84%9c-%eb%a7%88%ec%9d%b4%ea%b7%b8%eb%a0%88%ec%9d%b4%ec%85%98%ed%95%98%ea%b8%b0"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >다중 데이터 경로에서 마이그레이션하기</a>
+            </li>
+          <li>
+              <a
+                href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%aa%85-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >클러스터명 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%eb%85%b8%eb%93%9c%eb%aa%85-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >노드명 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%98%b8%ec%8a%a4%ed%8a%b8-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >네트워크 호스트 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%eb%94%94%ec%8a%a4%ec%bb%a4%eb%b2%84%eb%a6%ac-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >디스커버리 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%ed%9e%99%ed%81%ac%ea%b8%b0-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >힙크기 설정</a>
+            </li>
+          <li>
+              <a
+                href="#jvm-%ed%9e%99%eb%8d%a4%ed%94%84-%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >JVM 힙덤프 경로 설정</a>
+            </li>
+          <li>
+              <a
+                href="#gc-%eb%a1%9c%ea%b9%85-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >GC 로깅 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%ec%9e%84%ec%8b%9c-%eb%94%94%eb%a0%89%ed%84%b0%eb%a6%ac-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >임시 디렉터리 설정</a>
+            </li>
+          <li>
+              <a
+                href="#jvm-%ec%b9%98%eb%aa%85%ec%a0%81-%ec%98%a4%eb%a5%98%eb%a1%9c%ea%b7%b8-%ec%84%a4%ec%a0%95"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >JVM 치명적 오류로그 설정</a>
+            </li>
+          <li>
+              <a
+                href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%b0%b1%ec%97%85"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >클러스터 백업</a>
+            </li>
+          </ul>
+  
+              
+            </li></ul>
+      </div>
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/"
+    
+  >Boto3
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/"
+    
+  >코드 예제
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a>
+              <div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/"
+    
+  >Amazon S3 예제
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a>
+              <div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/creating-buckets/"
+    
+  >Bucket 생성
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/uploading-files/"
+    
+  >파일 업로드
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/download-file/"
+    
+  >파일 다운로드
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/file-transfer/"
+    
+  >파일 전송 구성
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/presigned-urls/"
+    
+  >사전인증 URL
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/bucket-policies/"
+    
+  >버킷 정책
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/access-permissions/"
+    
+  >접근 권한
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/static-web-host/"
+    
+  >정적 웹호스트
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/configuring-buckets/"
+    
+  >버킷 CORS 구성
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/boto3/example/s3/privatelink/"
+    
+  >PrivateLink
+    </a>
+              
+            </li></ul>
+      </div>
+            </li></ul>
+      </div>
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/docs/"
+    
+  >문서번역
+    </a></li>
+    </ul>
+
+    <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
+        
+          <li class="open"><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/elasticsearch_setup/config/"
+    
+  >Elasticsearch 구성
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+    href="/elasticsearch_setup/config/important-settings/"
+    
+  >중요구성
+    </a>
+              
+            </li></ul>
+      </div></li>
+        
+      </ul>
+    </div>
+  
+  
+    <div class="  hx-sticky hx-bottom-0 hx-bg-white dark:hx-bg-dark hx-mx-4 hx-py-4 hx-shadow-[0_-12px_16px_#fff] hx-flex hx-items-center hx-gap-2 dark:hx-border-neutral-800 dark:hx-shadow-[0_-12px_16px_#111] contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-shadow-none hx-border-t" data-toggle-animation="show"><div class="hx-flex hx-grow hx-flex-col"><button
+  title="테마변경"
+  data-theme="light"
+  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  type="button"
+  aria-label="테마변경"
+>
+  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize"><svg height=12 class="group-data-[theme=light]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="group-data-[theme=light]:hx-hidden">밝은 테마</span><svg height=12 class="group-data-[theme=dark]:hx-hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg><span class="group-data-[theme=dark]:hx-hidden">어두운 테마</span></div>
+</button>
+</div></div></aside>
+    
+<nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">페이지 목차</p><ul>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95">경로 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c">다중 데이터 경로
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c%ec%97%90%ec%84%9c-%eb%a7%88%ec%9d%b4%ea%b7%b8%eb%a0%88%ec%9d%b4%ec%85%98%ed%95%98%ea%b8%b0">다중 데이터 경로에서 마이그레이션하기
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%aa%85-%ec%84%a4%ec%a0%95">클러스터명 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%eb%85%b8%eb%93%9c%eb%aa%85-%ec%84%a4%ec%a0%95">노드명 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%98%b8%ec%8a%a4%ed%8a%b8-%ec%84%a4%ec%a0%95">네트워크 호스트 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%eb%94%94%ec%8a%a4%ec%bb%a4%eb%b2%84%eb%a6%ac-%ec%84%a4%ec%a0%95">디스커버리 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ed%9e%99%ed%81%ac%ea%b8%b0-%ec%84%a4%ec%a0%95">힙크기 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#jvm-%ed%9e%99%eb%8d%a4%ed%94%84-%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95">JVM 힙덤프 경로 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#gc-%eb%a1%9c%ea%b9%85-%ec%84%a4%ec%a0%95">GC 로깅 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#jvm-%ec%98%88%ec%a0%9c">JVM 예제
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ec%9e%84%ec%8b%9c-%eb%94%94%eb%a0%89%ed%84%b0%eb%a6%ac-%ec%84%a4%ec%a0%95">임시 디렉터리 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#jvm-%ec%b9%98%eb%aa%85%ec%a0%81-%ec%98%a4%eb%a5%98%eb%a1%9c%ea%b7%b8-%ec%84%a4%ec%a0%95">JVM 치명적 오류로그 설정
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%b0%b1%ec%97%85">클러스터 백업
+        </a>
+      </li></ul>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><a class="hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50" href="https://github.com/iju707/blog/edit/master/content/elasticsearch_setup/config/important-settings.md" target="_blank" rel="noreferer">Github에서 편집하기 →</a>
+        <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
+          <span>맨위로 스크롤</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
+      <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+        <a href="https://blog.oofbird.me/elasticsearch_setup/">Elasticsearch 설정</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+        <a href="https://blog.oofbird.me/elasticsearch_setup/config/">Elasticsearch 구성</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">중요구성</div>
+</div>
+
+        <div class="content">
+          <h1>중요 엘라스틱서치 구성</h1>
+          <blockquote>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html</a></p>
+</blockquote>
+<p>엘라스틱서치는 시작하는데 아주 작은 설정을 요구하지만 운영환경에서 클러스터를 구성하는데 <strong>필수로</strong> 고려해야될 다수의 설정이 있습니다.</p>
+<ul>
+<li><a href="#%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95" >경로 설정</a></li>
+<li><a href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%aa%85-%ec%84%a4%ec%a0%95" >클러스터명 설정</a></li>
+<li><a href="#%eb%85%b8%eb%93%9c%eb%aa%85-%ec%84%a4%ec%a0%95" >노드명 설정</a></li>
+<li><a href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%98%b8%ec%8a%a4%ed%8a%b8-%ec%84%a4%ec%a0%95" >네트워크 호스트 설정</a></li>
+<li><a href="#%eb%94%94%ec%8a%a4%ec%bb%a4%eb%b2%84%eb%a6%ac-%ec%84%a4%ec%a0%95" >디스커버리 설정</a></li>
+<li><a href="#%ed%9e%99%ed%81%ac%ea%b8%b0-%ec%84%a4%ec%a0%95" >힙크기 설정</a></li>
+<li><a href="#jvm-%ed%9e%99%eb%8d%a4%ed%94%84-%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95" >JVM 힙덤프 경로 설정</a></li>
+<li><a href="#gc-%eb%a1%9c%ea%b9%85-%ec%84%a4%ec%a0%95" >GC 로깅 설정</a></li>
+<li><a href="#%ec%9e%84%ec%8b%9c-%eb%94%94%eb%a0%89%ed%84%b0%eb%a6%ac-%ec%84%a4%ec%a0%95" >임시 디렉터리 설정</a></li>
+<li><a href="#jvm-%ec%b9%98%eb%aa%85%ec%a0%81-%ec%98%a4%eb%a5%98%eb%a1%9c%ea%b7%b8-%ec%84%a4%ec%a0%95" >JVM 치명적 오류로그 설정</a></li>
+<li><a href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%b0%b1%ec%97%85" >클러스터 백업</a></li>
+</ul>
+<p><a href="https://www.elastic.co/cloud/elasticsearch-service/signup?page=docs&amp;placement=docs-body" target="_blank" rel="noopener">Elastic Cloud</a> 서비스에서 이러한 설정을 자동으로 구성하며 기본적으로 운영환경에 바로 사용하 수 있도록 클러스터를 만들어줍니다.</p>
+<h2>경로 설정<span class="hx-absolute -hx-mt-20" id="경로-설정"></span>
+    <a href="#%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>엘라스틱서치는 인덱싱된 인덱스 데이터와 스트림 데이터를 <code>data</code> 디렉터리에 저장합니다.
+클러스터 상태 및 동작 등의 정보를 포함한 어플리케이션 로그를 <code>logs</code> 디렉터리에 저장합니다.</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html" target="_blank" rel="noopener">macOS <code>.tar.gz</code></a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html" target="_blank" rel="noopener">Linux <code>.tar.gz</code></a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html" target="_blank" rel="noopener">Windows <code>.zip</code></a> 설치에서는 <code>data</code>와 <code>logs</code>가 <code>$ES_HOME</code>의 하위 디렉터리로 기본설정 되어있습니다.
+그러나 <code>$ES_HOME</code>의 파일은 업그레이드때 삭제될 가능성이 있습니다.</p>
+<p>운영환경에서 <code>elasticsearch.yml</code>의 <code>path.data</code>와 <code>path.logs</code>를 <code>$ES_HOME</code> 밖으로 설정하길 권장합니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener">Docker</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html" target="_blank" rel="noopener">Debian</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html" target="_blank" rel="noopener">RPM</a> 패키지로 설치한 경우 기본적으로 <code>$ES_HOME</code>의 밖 위치에서 데이터와 로그를 기록합니다.</p>
+<p>플랫폼에 따라 <code>path.data</code>와 <code>path.logs</code> 값이 다르게 지원됩니다.</p>
+<div class="hx-mt-4 hx-flex hx-w-max hx-min-w-full hx-border-b hx-border-gray-200 hx-pb-px dark:hx-border-neutral-800"><button
+      class="tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white"
+      role="tab"
+      type="button"
+      aria-controls="tabs-panel-0"
+      aria-selected="true"
+      tabindex="0"
+      data-state="selected"
+    >Unix 시스템</button><button
+      class="tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white"
+      role="tab"
+      type="button"
+      aria-controls="tabs-panel-1"
+      
+      
+      
+    >Windows</button></div>
+<div>
+  
+<div
+  class="tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block"
+  id="tabs-panel-0"
+  role="tabpanel"
+  tabindex="0"
+  data-state="selected"
+>
+  <p>리눅스와 macOS 설치는 Unix 스타일 경로를 지원합니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="l">/var/data/elasticsearch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">logs</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log/elasticsearch</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+</div>
+
+<div
+  class="tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block"
+  id="tabs-panel-1"
+  role="tabpanel"
+  
+  
+>
+  <p>Windows 설치는 이스케이프된 백슬래시와 DOS 경로를 지원합니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;C:\\Elastic\\Elasticsearch\\data&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">logs</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;C:\\Elastic\\Elasticsearch\\logs&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ⚠️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      <p>절대 데이터 디렉터리안을 수정하거나 안의 내용을 방해하는 프로세스를 실행하면 안됩니다.
+엘라스틱서치가 아닌 다른 것이 데이터 디렉터리의 내용을 수정한다면, 엘라스틱서치는 오류가 발생하여 손상이나 데이터 불일치가 보고되거나 올바르게 작동하긴 하지만 일부 데이터가 손실될 수 있습니다.</p>
+<p>데이터 디렉터리 자체를 파일시스템 백업으로 수행하지 마세요.
+대신, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html" target="_blank" rel="noopener">스냅샷과 복구</a>를 활용하여 안전하게 백업하세요.</p>
+<p>데이터 디렉터리에 바이러스 검사를 수행하지 마세요.
+바이러스 검사기가 엘라스틱서치의 정상작동을 막고 데이터 디렉터리의 내용을 수정할 수 있습니다.
+데이터 디렉터리에는 실행파일이 없으므로 거짓된 긍정만 발견될 수 있습니다.</p>
+
+    </div>
+  </div>
+</div>
+
+<h2>다중 데이터 경로<span class="hx-absolute -hx-mt-20" id="다중-데이터-경로"></span>
+    <a href="#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c" class="subheading-anchor" aria-label="Permalink for this section"></a></h2>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ⚠️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      7.13.0부터 더이상 사용되지 않음
+    </div>
+  </div>
+</div>
+
+<p>필요하다면, <code>path.data</code>에 다중경로를 설정할 수 있습니다.
+엘라스틱서치는 모든 제공되는 경로 전반적으로 노드의 데이터를 저장하지만 각각 샤드는 동일한 경로에 저장합니다.</p>
+<p>엘라스틱서치는 노드의 데이터 경로에 샤드의 균형을 맞추지는 않습니다.
+단일 경로에 높은 디스크 사용률은 노드 전체에 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cluster.html#disk-based-shard-allocation" target="_blank" rel="noopener">높은 디스크 사용량 워터마크</a>를 발생시킵니다.
+발생된다면 엘라스틱서치는 해당 노드의 다른 경로에 충분한 디스크 용량이 있더라도 샤드를 추가하지 않습니다.
+추가적인 디스크 공간이 필요하다면, 추가 데이터 경로보다는 신규 노드를 추천합니다.</p>
+<div class="hx-mt-4 hx-flex hx-w-max hx-min-w-full hx-border-b hx-border-gray-200 hx-pb-px dark:hx-border-neutral-800"><button
+      class="tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white"
+      role="tab"
+      type="button"
+      aria-controls="tabs-panel-0"
+      aria-selected="true"
+      tabindex="0"
+      data-state="selected"
+    >Unix 시스템</button><button
+      class="tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white"
+      role="tab"
+      type="button"
+      aria-controls="tabs-panel-1"
+      
+      
+      
+    >Windows</button></div>
+<div>
+  
+<div
+  class="tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block"
+  id="tabs-panel-0"
+  role="tabpanel"
+  tabindex="0"
+  data-state="selected"
+>
+  <p>리눅스와 macOS 설치는 <code>path.data</code>에 Unix 스타일의 다중 경로를 지원합니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/mnt/elasticsearch_1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/mnt/elasticsearch_2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/mnt/elasticsearch_3</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+</div>
+
+<div
+  class="tabs-panel hx-rounded hx-pt-6 hx-hidden data-[state=selected]:hx-block"
+  id="tabs-panel-1"
+  role="tabpanel"
+  
+  
+>
+  <p>Windows 설치는 <code>path.data</code>에 DOS의 다중 경로를 지원합니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;C:\\Elastic\\Elasticsearch_1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;E:\\Elastic\\Elasticsearch_2&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;F:\\Elastic\\Elasticsearch_3&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+</div>
+
+
+</div>
+
+<h2>다중 데이터 경로에서 마이그레이션하기<span class="hx-absolute -hx-mt-20" id="다중-데이터-경로에서-마이그레이션하기"></span>
+    <a href="#%eb%8b%a4%ec%a4%91-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b2%bd%eb%a1%9c%ec%97%90%ec%84%9c-%eb%a7%88%ec%9d%b4%ea%b7%b8%eb%a0%88%ec%9d%b4%ec%85%98%ed%95%98%ea%b8%b0" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>다중 데이터 경로 지원은 7.13부터 사용되지 않으며 추후 릴리즈에서 삭제될 예정입니다.</p>
+<p>다중 데이터 경로대신 RAID와 같은 하드웨어 가상화 계층 또는 리눅스에서 논리 볼륨 관리자(LVM, Logical Volume Manager)나 윈도우의 저장소 공간(Storage Spaces)와 같은 소프트웨어 가상화 계층으로 다수의 디스크를 묶은 파일시스템을 생성할 수 있습니다.
+하나의 장비에서 다수의 데이터 경로를 사용하고 싶다면 필히 데이터 경로마다 노드를 실행해야합니다.</p>
+<p>현재 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/high-availability-cluster-design.html" target="_blank" rel="noopener">고가용성 클러스터</a>에 다중 데이터 경로를 사용하고 있다면 각각 노드에 단일 경로를 사용하도록 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/restart-cluster.html#restart-cluster-rolling" target="_blank" rel="noopener">롤링 시작</a>과 유사한 절차를 사용하여 중단시간 없이 설정을 마이그레이션 해야합니다.
+각각 노드가 차례로 중단 되면서 단일 데이터 경로로 구성된 하나이상의 노드로 교체됩니다.
+더 자세한 것은 현재 다중 데이터 경로를 가지고 있는 각각의 노드에 대하여 아래 프로세스를 수행해야 합니다.
+원칙적으로 이 마이그레이션을 8.0으로 롤링업그레이드 할 때 가능하나, 단일 데이터 경로 구성 후 업그레이드 시작을 권장합니다.</p>
+<ol>
+<li>
+<p>장애에 대비하여 데이터보호를 위해 스냅샷을 수행합니다.</p>
+</li>
+<li>
+<p>선택적으로, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/modules-cluster.html#cluster-shard-allocation-filtering" target="_blank" rel="noopener">할당 필터</a>를 사용하여 대상 노드를 데이터에서 떼어놓습니다.</p>
+</li>
+</ol>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">PUT _cluster/settings
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;persistent&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;cluster.routing.allocation.exclude._name&#34;</span>: <span class="s2">&#34;target-node-name&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/cat-allocation.html" target="_blank" rel="noopener">할당 보기 API</a>를 통해 이 데이터 마이그레이션 처리과정을 추적할 수 있습니다.
+일부 샤드가 마이그레이션이 안되면 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/cluster-allocation-explain.html" target="_blank" rel="noopener">클러스터 할당 설명 API</a>를 통해 왜 안되는지 확인이 가능합니다.</p>
+<ol start="3">
+<li>
+<p>대상 노드 중단을 포함하여 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/restart-cluster.html#restart-cluster-rolling" target="_blank" rel="noopener">롤링 시작 프로세스</a>의 단계를 따르세요.</p>
+</li>
+<li>
+<p>클러스터의 상태가 <code>yello</code>나 <code>green</code>이면 모든 샤드의 복제가 클러스터내 적어도 다른 노드 하나에 할당 되었다는 것 입니다.</p>
+</li>
+<li>
+<p>적용이 되면, 이전 단계에서 적용한 할당 필터를 제거합니다.</p>
+</li>
+</ol>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">PUT _cluster/settings
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;persistent&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;cluster.routing.allocation.exclude._name&#34;</span>: null
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<ol start="6">
+<li>
+<p>데이터 경로의 내용를 삭제하여 중지된 노드가 보유한 데이터를 폐기해야합니다.</p>
+</li>
+<li>
+<p>저장소를 재구성합니다. 예로, LVM이나 저장소 공간을 사용한 단일 파일시스템으로 디스크를 결합합니다. 재구성된 저장소에 보유한 데이터를 위한 충분한 공간이 있는지 확인합니다.</p>
+</li>
+<li>
+<p><code>elasitcsearch.yml</code> 파일의 <code>path.data</code> 설정을 조정하여 노드를 재구성합니다. 필요하면 분리된 데이터 경로를 <code>path.data</code>로 설정하여 추가적인 노드를 설치합니다.</p>
+</li>
+<li>
+<p>새 노드를 시작하고 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/restart-cluster.html#restart-cluster-rolling" target="_blank" rel="noopener">롤링 시작 절차</a>의 나머지를 따라합니다.</p>
+</li>
+<li>
+<p>클러스터의 상태가 <code>green</code>임을 확인합니다. 그럼 모든 샤드가 할당되었습니다.</p>
+</li>
+</ol>
+<p>다른 방법으로는 단일 데이터 경로 노드를 클러스터에 추가하고 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/modules-cluster.html#cluster-shard-allocation-filtering" target="_blank" rel="noopener">할당 필터</a>를 사용하여 새로운 노드에 데이터 전반을 마이그레이션하고 클러스터에서 이전 노드를 삭제합니다.
+이 방법은 순간적으로 클러스터의 크기를 두배로 사용되기 때문에 가능한 용량이 있는지 확인하고 진행해야합니다.</p>
+<p>현재 다중 데이터 경로를 사용하고 클러스터의 가용성이 높지 않은 경우 스냅샷을 만들고 원하는 구성으로 클러스터를 생성한 뒤 복원하여 더 이상 사용하지 않는 구성으로 마이그레이션할 수 있습니다.</p>
+<h2>클러스터명 설정<span class="hx-absolute -hx-mt-20" id="클러스터명-설정"></span>
+    <a href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%aa%85-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>노드는 클러스터의 다른 모든 노드와 동일한 <code>cluster.name</code>을 공유할때만 합류할 수 있습니다. 기본값은 <code>elasticsearch</code> 입니다. 클러스터 목적에 따라 적절한 이름으로 변경도 가능합니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l">logging-prod</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ⚠️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      절대로 다른 환경에서 동일한 클러스터명을 사용하지 마세요.
+그렇지 않으면 원치않게 노드가 다른 클러스터로 합류할 수 있습니다.
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ℹ️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      클러스터명의 변경은 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-cluster.html#restart-cluster-full" target="_blank" rel="noopener">클러스터 전체 재시작</a>이 필요합니다.
+    </div>
+  </div>
+</div>
+
+<h2>노드명 설정<span class="hx-absolute -hx-mt-20" id="노드명-설정"></span>
+    <a href="#%eb%85%b8%eb%93%9c%eb%aa%85-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>엘라스틱서치는 <code>node.name</code>를 사용해서 엘라스틱서치의 특정 인스턴스에 대한 사람이 읽을 수 있는 식별자 지정이 가능합니다.
+이 이름은 많은 API 응답에 포함됩니다.
+엘라스틱서치가 시작될 때 장치의 호스트명이 기본값으로 설정되나 명시적으로 <code>elasticsearch.yml</code>에 구성할 수 있습니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">node.name</span><span class="p">:</span><span class="w"> </span><span class="l">prod-data-2</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h2>네트워크 호스트 설정<span class="hx-absolute -hx-mt-20" id="네트워크-호스트-설정"></span>
+    <a href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%98%b8%ec%8a%a4%ed%8a%b8-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>기본적으로 엘라스틱서치는 <code>127.0.0.1</code> 또는 <code>[::1]</code>과 같은 루프백 주소에만 바인딩됩니다.
+이것은 개발 또는 테스트 목적으로 단일 서버에 한개이상의 노드로 클러스터를 실행할때 적합합니다.
+그러나, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/high-availability-cluster-design.html" target="_blank" rel="noopener">탄력적인 운영환경 클러스터</a>는 다른서버의 노드를 포함해야합니다.
+다양한 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html" target="_blank" rel="noopener">네트워크 설정</a>이 있지만 보통 필요한 설정은 <code>network.host</code> 입니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">network.host</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.1.10</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ⚠️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      <code>network.host</code>의 값을 설정할 때 엘라스틱서치는 개발모드에서 운영모드로 전환된다고 가정하고 시스템 시작 확인의 다수를 경고에서 예외로 변경합니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html#dev-vs-prod" target="_blank" rel="noopener">개발과 운영 모드</a>의 차이를 살펴보세요.
+    </div>
+  </div>
+</div>
+
+<h2>디스커버리 설정<span class="hx-absolute -hx-mt-20" id="디스커버리-설정"></span>
+    <a href="#%eb%94%94%ec%8a%a4%ec%bb%a4%eb%b2%84%eb%a6%ac-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>두가지 중요한 디스커버리와 클러스터 형성 설정을 운영에 가기전에 구성해서 클러스터의 노드가 서로를 탐색하고 마스터 노드를 선출할 수 있게 합니다.</p>
+<p><code>discovery.seed_hosts</code></p>
+<p>네트워크 구성없이 즉시사용할 경우 엘라스틱서치는 사용가능한 루프백 주소에 바인딩되고 <code>9300</code>부터 <code>9305</code>까지 동일한 서버에 다른 노드가 실행중인지 로컬포트를 스캔합니다.
+이 동작으로 다른 구성없이 자동 클러스터링 경험을 제공합니다.</p>
+<p>다른 호스트의 노드와의 클러스터 형태를 원한다면, <a href="../#%ea%b3%a0%ec%a0%95%ed%98%95" >정적</a> <code>discovery.seed_hosts</code> 설정을 사용합니다.
+이 설정은 [디스커버리 절차]의 시작이 가능한 살아있고 접근가능한 클러스터의 다른 마스터적격 노드 목록을 제공합니다.
+이 설정은 클러스터의 마스터적격 노드의 모든 주소를 YAML 시퀀스나 목록으로 설정됩니다.
+각각의 주소는 IP 주소 또는 DNS를 통해 한개이상의 IP 주소로 변경이 가능한 호스트명으로 구성됩니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">discovery.seed_hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">192.168.1.10</span><span class="p">:</span><span class="m">9300</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">192.168.1.11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">seeds.mydomain.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="p">[</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="l">ffff:c0a8:10c]:9301</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<ul>
+<li>포트는 기본값으로 <code>9300</code>입니다. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/discovery-hosts-providers.html#built-in-hosts-providers" target="_blank" rel="noopener">덮어쓸 수 있습니다.</a></li>
+<li>호스트명이 다수의 IP로 해석이되면, 노드는 확인된 모든 주소에서 다른 노드를 찾으려고 시도합니다.</li>
+<li>IPv6 주소는 대괄호로 묶여야합니다.</li>
+</ul>
+<p>마스터적격 노드가 고정된 이름 또는 주소가 없을 경우 주소를 동적으로 찾을 수 있도록 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/discovery-hosts-providers.html#built-in-hosts-providers" target="_blank" rel="noopener">대안 호스트 제공자</a>를 사용할 수 있습니다.</p>
+<p><code>cluster.initial_master_nodes</code></p>
+<p>엘라스틱서치가 최초 동작시, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-bootstrap-cluster.html" target="_blank" rel="noopener">클러스터 부트스트래핑</a> 절차에서 최초선거의 투표가 집계되는 마스터적격 노드의 집합을 결정합니다.</p>
+<p>자동-부트스트래핑은 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-quorums.html" target="_blank" rel="noopener">잠재적으로 불안정</a>하기 때문에 운영모드의 새로운 클러스터를 시작할 때 가장 최초선거에서 투표 집계가 되는 마스터적격 노드를 명시적으로 목록화 해야합니다.
+이 목록은 <code>cluster.initial_master_nodes</code>를 사용하여 설정할 수 있습니다.</p>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ⚠️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      최초 클러스터 구성이 성공하면 각각 노드 구성의 <code>cluster.initial_master_nodes</code> 설정을 제거합니다.
+클러스터를 재시작할 때 또는 기존 클러스터에 새로운 노드를 추가할 때 이 설정을 사용하면 안됩니다.
+    </div>
+  </div>
+</div>
+
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">discovery.seed_hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">192.168.1.10</span><span class="p">:</span><span class="m">9300</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">192.168.1.11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">seeds.mydomain.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="p">[</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="m">0</span><span class="p">:</span><span class="l">ffff:c0a8:10c]:9301</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cluster.initial_master_nodes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">master-node-a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">master-node-b</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">master-node-c</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<ul>
+<li>호스트명이 기본값으로 사용되는 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#node-name" target="_blank" rel="noopener"><code>node.name</code></a>으로 초기 마스터노드를 식별합니다.
+<code>cluster.initial_master_nodes</code>의 값에 <code>node.name</code>가 명확히 일치해야합니다.
+노드명에 <code>master-node-a.example.com</code>과 같은 정규화된 도메인명(FQDN, Fully-Qualified Domain Name)을 사용한다면 목록에 FQDN을 사용해야합니다.
+반대로, <code>node.name</code>이 후행 한정자가 없는 순수 호스트이름인 경우 <code>cluster.initial_master_nodes</code>에서 후행 한정자를 생략해야합니다.</li>
+</ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-bootstrap-cluster.html" target="_blank" rel="noopener">클러스터 부트스트래핑</a>과 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-settings.html" target="_blank" rel="noopener">디스커버리와 클러스터 형성 설정</a>을 참고하세요.</p>
+<h2>힙크기 설정<span class="hx-absolute -hx-mt-20" id="힙크기-설정"></span>
+    <a href="#%ed%9e%99%ed%81%ac%ea%b8%b0-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>기본적으로 엘라스틱서치는 JVM 힙크기를 노드의 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html#node-roles" target="_blank" rel="noopener">역할</a>과 전체 메모리를 기반으로 자동설정합니다.
+대부분의 운영환경에서는 기본크기를 권장합니다.</p>
+<p>필요하다면 기본크기를 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-heap-size" target="_blank" rel="noopener">JVM 힙 크기 설정</a>으로 설정할 수 있습니다.</p>
+<h2>JVM 힙덤프 경로 설정<span class="hx-absolute -hx-mt-20" id="jvm-힙덤프-경로-설정"></span>
+    <a href="#jvm-%ed%9e%99%eb%8d%a4%ed%94%84-%ea%b2%bd%eb%a1%9c-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>엘라스틱서치는 기본적으로 데이터 디렉터리에 메모리초과 오류가 발생하면 힙덤프를 받도록 JVM 설정이 되어있습니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html" target="_blank" rel="noopener">RPM</a>과 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html" target="_blank" rel="noopener">Debian</a> 패키지에서 데이터 디렉터리는 <code>/var/lib/elasticsearch</code>입니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html" target="_blank" rel="noopener">리눅스와 맥</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html" target="_blank" rel="noopener">윈도우</a> 배포판은 <code>data</code> 디렉터리가 엘라스틱서치 설치의 상위디렉터리에 위치해있습니다.</p>
+<p>이 경로가 힙덤프를 받기 적절치 않으면, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-options" target="_blank" rel="noopener"><code>jvm.options</code></a>의 <code>-XX:HeapDumpPath=...</code>를 수정합니다.</p>
+<ul>
+<li>디렉터리를 지정하면 JVM이 실행중인 인스턴스의 PID를 기반으로 힙덤프 파일명을 생성합니다.</li>
+<li>디렉터리 대신 고정된 파일명으로 지정하면 JVM이 메모리초과 오류가 발생해서 힙덤프를 만들 때 파일이 있으면 안됩니다.
+그렇지 않으면 힙덤프는 실패합니다.</li>
+</ul>
+<h2>GC 로깅 설정<span class="hx-absolute -hx-mt-20" id="gc-로깅-설정"></span>
+    <a href="#gc-%eb%a1%9c%ea%b9%85-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>엘라스틱서치는 가비지컬렉션(GC) 로그를 활성화합니다.
+<code>jvm.options</code>에서 구성할 수 있고 엘라스틱서치 로그의 동일 기본경로에 출력됩니다.
+기본 구성은 매 64MB 마다 로그가 순환되고 디스크공간을 최대 2GB 사용합니다.</p>
+<p><a href="https://openjdk.java.net/jeps/158" target="_blank" rel="noopener">JEP 158: Unified JVM Logging</a>에 설명된 것 처럼 명령줄 옵션으로 JVM 로깅을 재구성할 수 있습니다.
+기본 <code>jvm.options</code> 파일을 직접 변경하지 않으면 엘라스틱서치는 기본 구성에 설정을 추가합니다.
+기본 구성을 비활성화 하려면 <code>-xlog:disable</code>로 최초 로깅을 비활성화 한 뒤 명령줄 옵션을 적용합니다.
+이렇게 하면 모든 JVM 로깅을 비활성화되기 때문에 사용가능한 옵션을 확인하고 필요한 모든것을 활성화 해야합니다.</p>
+<p>JEP 원본에 포함되지 않은 많은 옵션은 <a href="https://docs.oracle.com/en/java/javase/13/docs/specs/man/java.html#enable-logging-with-the-jvm-unified-logging-framework" target="_blank" rel="noopener">JVM Unified Logging 프레임워크로 로깅활성화</a>를 참고하세요.</p>
+<h3>JVM 예제<span class="hx-absolute -hx-mt-20" id="jvm-예제"></span>
+    <a href="#jvm-%ec%98%88%ec%a0%9c" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>몇몇 샘플 옵션과 함께 <code>/opt/my-app/gc.log</code>로 기본 GC 로그 출력위치를 변경하는 <code>$ES_HOME/config/jvm.options.d/gc.options</code>파일 예제입니다.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<pre><code># 모든 로그설정을 비활성화 합니다.
+-Xlog:disable
+
+# JEP 158의 기본설정이지만 다음줄과 일치하도록 `uptime` 대신 `utctime`을 사용합니다.
+-Xlog:all=warning:stderr:utctime,level,tags
+
+# 다양한 옵션과 사용자정의 위치로 GC 로깅을 활성화 합니다.
+-Xlog:gc*,gc&#43;age=trace,safepoint:file=/opt/my-app/gc.log:utctime,level,pid,tags:filecount=32,filesize=64m</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>엘라스틱서치 [Docker 컨테이너]가 GC 디버그 로그를 표준 에러(<code>stderr</code>)로 전송할 수 있도록 구성합니다.
+이를 통해 컨테이너 오케스트레이터가 출력을 다룰 수 있습니다.
+<code>ES_JAVA_OPTS</code> 환경변수를 사용하면 다음과 같이 지정하세요.</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<pre><code>MY_OPTS=&#34;-Xlog:disable -Xlog:all=warning:stderr:utctime,level,tags -Xlog:gc=debug:stderr:utctime&#34;
+docker run -e ES_JAVA_OPTS=&#34;$MY_OPTS&#34; # etc</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h2>임시 디렉터리 설정<span class="hx-absolute -hx-mt-20" id="임시-디렉터리-설정"></span>
+    <a href="#%ec%9e%84%ec%8b%9c-%eb%94%94%eb%a0%89%ed%84%b0%eb%a6%ac-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>엘라스틱서치는 시작스크립트에서 시스템 임시 디렉터리 하위에 바로 개별 임시 디렉터리를 생성하여 사용합니다.</p>
+<p>몇몇 리눅스 배포판에는 시스템유틸리티가 최근 접근하지 않았으면 <code>/tmp</code>에 파일과 디렉터리를 청소합니다.
+이 동작은 엘라스틱서치가 동작중일 때 임시 디렉터리를 사용하는 기능이 장기간 사용되지 않으면 개별 임시 디렉터리 또한 삭제된다는 것 입니다.
+이 기능이 나중에 다시 사용되면 개별 임시 디렉터리가 삭제됨으로 문제가 발생할 수 있습니다.</p>
+<p><code>.deb</code>나 <code>.rpm</code> 패키지를 사용하여 엘라스틱서치를 설치하고 <code>systemd</code> 하위에 실행된다면 개별 임시 디렉터리는 정기적 정리대상에서 제외됩니다.</p>
+<p>장기간동안 리눅스나 맥의 <code>.tar.gz</code> 배포판을 실행한 경우 오래된 파일이나 디렉터리가 정리되는 경로 하위말고 다른 위치에 임시 디렉터리 생성을 고려해야합니다.
+이 디렉터리는 엘라스틱서치를 실행한 사용자가 접근할 수 있도록 권한을 설정해야합니다.
+그리고 엘라스틱서치가 실행할 때 <code>$EV_TMDIR</code> 환경변수로 설정하여 해당 위치를 가리킵니다.</p>
+<h2>JVM 치명적 오류로그 설정<span class="hx-absolute -hx-mt-20" id="jvm-치명적-오류로그-설정"></span>
+    <a href="#jvm-%ec%b9%98%eb%aa%85%ec%a0%81-%ec%98%a4%eb%a5%98%eb%a1%9c%ea%b7%b8-%ec%84%a4%ec%a0%95" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>엘라스틱서치는 기본 로깅 디렉터리에 fatal 에러 로그를 작성하도록 JVM을 구성합니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html" target="_blank" rel="noopener">RPM</a>과 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html" target="_blank" rel="noopener">Debian</a> 패키지는 이 디렉터리가 <code>/var/log/elasticsearch</code> 입니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html" target="_blank" rel="noopener">리눅스와 맥</a>과 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html" target="_blank" rel="noopener">윈도우</a> 배포판의 <code>logs</code> 디렉터리는 엘라스틱서치 설치의 상위 디렉터리에 위치합니다.</p>
+<p>세그먼트폴트와 같은 fatal 에러가 발생하면 JVM이 생성하는 로그가 있습니다.
+로그를 받기 경로가 적절치 않다면 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/advanced-configuration.html#set-jvm-options" target="_blank" rel="noopener"><code>jvm.options</code></a>의 <code>-XX:ErrorFile=...</code> 항목을 수정하세요.</p>
+<h2>클러스터 백업<span class="hx-absolute -hx-mt-20" id="클러스터-백업"></span>
+    <a href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%b0%b1%ec%97%85" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>재해시 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html" target="_blank" rel="noopener">스냅샷</a>은 영구적 데이터 손실을 방지합니다.
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html#automate-snapshots-slm" target="_blank" rel="noopener">스냅샷 생명주기 관리</a>는 클러스터의 일반적인 백업을 쉽게 생성하는 방법입니다.
+자세한 정보는 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html" target="_blank" rel="noopener">스냅샷을 생성</a>을 참고하세요.</p>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2"><div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        ⚠️
+      </div></div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      <strong>스냅샷을 만드는 것이 클러스터를 백업하는 안정적이고 지원되는 유일한 방법입니다.</strong>
+노드의 데이터 디렉터리만 복사하는 것으로 엘라스틱서치 클러스터를 백업할 수 없습니다.
+파일시스템수준 백업으로 데이터를 복구하는 방법을 지원하지 않습니다.
+이러한 백업으로 클러스터를 복구하면 손상, 누락된 파일 또는 기타 데이터 불일치로 보고되어 실패하거나 성공으로 보이나 부분적 데이터 손실이 발생할 수 있습니다.
+    </div>
+  </div>
+</div>
+
+
+        </div>
+        
+    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">마지막 수정일자 <time datetime="2023-11-01T01:48:00.000Z">2023년 11월 1일</time></div><div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1537305666483956" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1537305666483956"
+     data-ad-slot="4244012742"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+    <script>
+      window.onload = function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    </script>
+</div>
+
+        
+        <script>
+  
+
+  function getGiscusTheme() {
+    return localStorage.getItem("color-theme");
+  }
+
+  function setGiscusTheme() {
+    function sendMessage(message) {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    }
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(),
+      },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const giscusAttributes = {
+      "src": "https://giscus.app/client.js",
+      "data-repo": "iju707\/blog",
+      "data-repo-id": "R_kgDOKUrL5A",
+      "data-category": "General",
+      "data-category-id": "DIC_kwDOKUrL5M4CZlVJ",
+      "data-mapping": "pathname",
+      "data-strict": "0",
+      "data-reactions-enabled": "1",
+      "data-emit-metadata": "0",
+      "data-input-position": "top",
+      "data-theme": getGiscusTheme(),
+      "data-lang": "ko",
+      "crossorigin": "anonymous",
+      "async": "",
+    };
+
+    
+    const giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById('giscus').appendChild(giscusScript);
+
+    
+    const toggles = document.querySelectorAll(".theme-toggle");
+    if (toggles) {
+      toggles.forEach(toggle => toggle.addEventListener('click', setGiscusTheme));
+    }
+  });
+</script>
+
+<div id="giscus"></div>
+      </main>
+    </article>
+  </div>
+
+      <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div
+    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+  >
+    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-font-semibold"><a class="hx-flex hx-text-sm hx-items-center hx-gap-1 hx-text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
+    <span>제공 Hextra<svg height=1em class="hx-inline-block ltr:hx-ml-1 rtl:hx-mr-1 hx-align-[-2.5px]" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="m 105.50024,22.224647 c -9.59169,-5.537563 -21.40871,-5.537563 -31.000093,0 L 39.054693,42.689119 C 29.463353,48.226675 23.55484,58.460531 23.55484,69.535642 v 40.928918 c 0,11.07542 5.908513,21.3092 15.499853,26.84652 l 35.445453,20.46446 c 9.591313,5.53732 21.408404,5.53732 31.000094,0 l 35.44507,-20.46446 c 9.59131,-5.53732 15.49985,-15.7711 15.49985,-26.84652 V 69.535642 c 0,-11.075111 -5.90854,-21.308967 -15.49985,-26.846523 z M 34.112797,85.737639 c -1.384445,2.397827 -1.384445,5.352099 0,7.749927 l 24.781554,42.922974 c 1.38437,2.39783 3.942853,3.87496 6.711592,3.87496 h 49.563107 c 2.76905,0 5.3273,-1.47713 6.71144,-3.87496 l 24.78194,-42.922974 c 1.38414,-2.397828 1.38414,-5.3521 0,-7.749927 L 121.88049,42.814746 c -1.38414,-2.397828 -3.94239,-3.874964 -6.71144,-3.874964 H 65.605944 c -2.768739,0 -5.327223,1.477059 -6.711592,3.874964 z" style="stroke-width:0.774993" /></svg></span>
+  </a></div><div class="hx-mt-6 hx-text-xs">© 2023 OOFBIRD.ME</div>
+    </div>
+  </div>
+</footer>
+    
+    <script defer src="/js/main.min.342e1e44bc7342ae62e1a3b59ef97a9517fdcb27179b2b109a683bb5bb77d9a7.js" integrity="sha256-NC4eRLxzQq5i4aO1nvl6lRf9yycXmysQmmg7tbt32ac="></script>
+
+
+<script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
+    <script defer src="/ko.search.min.10138be2791368d3aab7bd072bbe444194cb963052a49507c2ac1f814e725b90.js" integrity="sha256-EBOL4nkTaNOqt70HK75EQZTLljBSpJUHwqwfgU5yW5A="></script>
+
+
+  </body>
+</html>
