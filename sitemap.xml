@@ -32,10 +32,13 @@
     <loc>https://blog.oofbird.me/boto3/example/s3/privatelink/</loc>
     <lastmod>2023-09-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.oofbird.me/elastic/</loc>
-    <lastmod>2024-01-22T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://blog.oofbird.me/</loc>
+    <lastmod>2024-05-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.oofbird.me/uml_tutorial/</loc>
+    <lastmod>2024-05-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.oofbird.me/elastic/</loc>
     <lastmod>2024-01-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.oofbird.me/elastic/rest-apis/indices-split-index/</loc>
