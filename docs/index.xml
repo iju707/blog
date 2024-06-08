@@ -425,6 +425,60 @@ Users로 써있는 객체는 엔티티 아이콘으로 표시했습니다.&lt;/p
     </item>
     
     <item>
+      <title>논리적 모델</title>
+      <link>https://blog.oofbird.me/uml_tutorial/logical-model/</link>
+      <pubDate>Sat, 08 Jun 2024 01:00:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/uml_tutorial/logical-model/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://sparxsystems.com/resources/tutorials/uml/logical-model.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://sparxsystems.com/resources/tutorials/uml/logical-model.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;논리적 모델은 객체와 클래스가 디자인/분석 공간에 만들어질 정적 뷰를 표현합니다.
+일반적으로 도메인 모델은 비즈니스 객체나 엔티티에 대한 느슨하고 상위적 개념을 표현하고, 클래스 모델은 좀더 엄격하고 디자인에 집중되어있습니다.
+이부분은 클래스 모델에 다시 다루겠습니다.&lt;/p&gt;
+&lt;h2&gt;클래스 모델&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;클래스-모델&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%81%b4%eb%9e%98%ec%8a%a4-%eb%aa%a8%eb%8d%b8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;클래스는 객체가 실행중일 때 만들어지는 패턴에 대한 상세를 표현하는 표준 UML 구조 입니다.
+클래스는 사양이며, 객체는 클래스의 인스턴스 입니다.
+클래스는 다른 클래스를 상속받기도 합니다. (부모의 모든 행동과 상태를 상속받고 자체적으로 새로운 기능을 추가힙니다)
+다른 클래스를 속성으로 가지기도 하고 다른 클래스에 책임을 위임하거나 추상 인터페이스를 구현합니다.&lt;/p&gt;
+&lt;p&gt;클래스 모델은 객체지향 개발과 디자인의 핵심입니다.
+시스템의 지속된 상태와 행동 둘다 표현해줍니다.
+클래스는 상태(속성)를 캡슐화하고 그 상태를 조작하는 서비스(행동)을 제공합니다.
+좋은 객체지향 디자인은 클래스의 속성에 직접적인 접근을 제약하고 호출자를 대신하여 속성을 조작하는 서비스를 제공합니다.
+데이터를 숨기고 서비스를 노출하는 것은 데이터의 갱신이 한곳에서 이뤄지고 특별한 규칙을 따르게 만듭니다.
+큰 시스템에서 여러 곳에서 데이터의 요소에 접근할 수 있는 코드는 유지보수의 가중을 급격하게 증가시킵니다.&lt;/p&gt;
+&lt;p&gt;클래스는 아래와 같이 표현됩니다.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././Class1.gif&#34; alt=&#34;Class1&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;클래스는 3개의 독립적인 영역을 가지고 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;클래스 이름(과 적용된 스테레오타입)&lt;/li&gt;
+&lt;li&gt;클래스 속성 영역 (내부적 데이터 요소)&lt;/li&gt;
+&lt;li&gt;행동 - private와 public 둘다 포함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;속성과 메소드는 다음과 같이 표시됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Private : 클래스 밖의 호출자에게 보이지 않는 것&lt;/li&gt;
+&lt;li&gt;Protected : 클래스의 자식에게만 보이는 것&lt;/li&gt;
+&lt;li&gt;Public : 모두에게 보이는 것&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;상속&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;상속&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%83%81%ec%86%8d&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;클래스 상속은 아래와 같습니다.
+이 경우 추상클래스는 2개의 자식에 대한 부모이며, 각각 기본 클래스 기능을 상속받고 자신만의 행동으로 확장합니다.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././Class2.gif&#34; alt=&#34;Class2&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;클래스 모델은 관련된 행동과 상태의 패키지로 모이게 됩니다.
+아래의 다이어 그램에서 그 내용을 표현하고 있습니다.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././Class3.gif&#34; alt=&#34;Class3&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Boto3를 활용한 파일 다운로드 예제</title>
       <link>https://blog.oofbird.me/boto3/example/s3/download-file/</link>
       <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>

@@ -11,40 +11,28 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 
-  <title>Boto3를 활용한 접근권한 예제 – OOFBIRD</title>
-  <meta name="description" content=" https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html
-이번 절에서 접근권한목록(ACL)을 사용해서 S3 버킷이나 객체에 대한 접근권한을 어떻게 관리하는지 알아보겠습니다.
-버킷 접근 권한 목록 가져오기 아래 예제는 S3 버킷의 현재 접근권한목록을 검색하는 것 입니다.
-import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result = s3.get_bucket_acl(Bucket=&#39;BUCKET_NAME&#39;) print(result) " />
+  <title>논리적 모델 – OOFBIRD</title>
+  <meta name="description" content="UML 중 논리적 모델을 설명합니다." />
 
   
-    <link rel="canonical" href="https://blog.oofbird.me/boto3/example/s3/access-permissions/" itemprop="url" />
+    <link rel="canonical" href="https://blog.oofbird.me/uml_tutorial/logical-model/" itemprop="url" />
   
 
   
 
-<meta property="og:title" content="Boto3를 활용한 접근권한 예제" />
-<meta property="og:description" content=" https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html
-이번 절에서 접근권한목록(ACL)을 사용해서 S3 버킷이나 객체에 대한 접근권한을 어떻게 관리하는지 알아보겠습니다.
-버킷 접근 권한 목록 가져오기 아래 예제는 S3 버킷의 현재 접근권한목록을 검색하는 것 입니다.
-import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result = s3.get_bucket_acl(Bucket=&#39;BUCKET_NAME&#39;) print(result) " />
+<meta property="og:title" content="논리적 모델" />
+<meta property="og:description" content="UML 중 논리적 모델을 설명합니다." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.oofbird.me/boto3/example/s3/access-permissions/" /><meta property="article:section" content="boto3" />
-<meta property="article:published_time" content="2023-09-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-09-20T00:00:00+00:00" />
+<meta property="og:url" content="https://blog.oofbird.me/uml_tutorial/logical-model/" /><meta property="article:section" content="uml_tutorial" />
+<meta property="article:published_time" content="2024-06-08T01:00:00+09:00" />
+<meta property="article:modified_time" content="2024-06-08T01:00:00+09:00" />
 
-  <meta itemprop="name" content="Boto3를 활용한 접근권한 예제">
-<meta itemprop="description" content=" https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html
-이번 절에서 접근권한목록(ACL)을 사용해서 S3 버킷이나 객체에 대한 접근권한을 어떻게 관리하는지 알아보겠습니다.
-버킷 접근 권한 목록 가져오기 아래 예제는 S3 버킷의 현재 접근권한목록을 검색하는 것 입니다.
-import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result = s3.get_bucket_acl(Bucket=&#39;BUCKET_NAME&#39;) print(result) "><meta itemprop="datePublished" content="2023-09-20T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-09-20T00:00:00+00:00" />
-<meta itemprop="wordCount" content="40">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Boto3를 활용한 접근권한 예제"/>
-<meta name="twitter:description" content=" https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html
-이번 절에서 접근권한목록(ACL)을 사용해서 S3 버킷이나 객체에 대한 접근권한을 어떻게 관리하는지 알아보겠습니다.
-버킷 접근 권한 목록 가져오기 아래 예제는 S3 버킷의 현재 접근권한목록을 검색하는 것 입니다.
-import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result = s3.get_bucket_acl(Bucket=&#39;BUCKET_NAME&#39;) print(result) "/>
+  <meta itemprop="name" content="논리적 모델">
+<meta itemprop="description" content="UML 중 논리적 모델을 설명합니다."><meta itemprop="datePublished" content="2024-06-08T01:00:00+09:00" />
+<meta itemprop="dateModified" content="2024-06-08T01:00:00+09:00" />
+<meta itemprop="wordCount" content="226">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="논리적 모델"/>
+<meta name="twitter:description" content="UML 중 논리적 모델을 설명합니다."/>
 
     <link rel="preload" href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" as="style" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
     <link href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" rel="stylesheet" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
@@ -186,7 +174,7 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
     <ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden">
       
       
-          <li class=""><a
+          <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/uml_tutorial/"
@@ -210,13 +198,28 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
   >다이나믹 모델
     </a>
               
-            </li><li class="hx-flex hx-flex-col "><a
+            </li><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
     href="/uml_tutorial/logical-model/"
     
   >논리적 모델
     </a>
+  
+    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
+              <a
+                href="#%ed%81%b4%eb%9e%98%ec%8a%a4-%eb%aa%a8%eb%8d%b8"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >클래스 모델</a>
+            </li>
+          <li>
+              <a
+                href="#%ec%83%81%ec%86%8d"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >상속</a>
+            </li>
+          </ul>
+  
               
             </li></ul>
       </div></li>
@@ -384,7 +387,7 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
       </div>
             </li></ul>
       </div></li>
-          <li class="open"><a
+          <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/boto3/"
@@ -392,7 +395,7 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
   >Boto3
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/boto3/example/"
@@ -401,7 +404,7 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/boto3/example/s3/"
@@ -458,22 +461,13 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
   >버킷 정책
     </a>
               
-            </li><li class="hx-flex hx-flex-col open"><a
+            </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/boto3/example/s3/access-permissions/"
     
   >접근 권한
     </a>
-  
-    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
-              <a
-                href="#%eb%b2%84%ed%82%b7-%ec%a0%91%ea%b7%bc-%ea%b6%8c%ed%95%9c-%eb%aa%a9%eb%a1%9d-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0"
-                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >버킷 접근 권한 목록 가져오기</a>
-            </li>
-          </ul>
-  
               
             </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
@@ -516,107 +510,27 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
 
     <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
         
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/uml_tutorial/use-case-model/"
+    
+  >유즈케이스 모델
+    </a></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/uml_tutorial/dynamic-model/"
+    
+  >다이나믹 모델
+    </a></li>
           <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/"
-    
-  >코드 예제
-        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
-    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/"
-    
-  >Amazon S3 예제
-        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
-    </a>
-              <div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/creating-buckets/"
-    
-  >Bucket 생성
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/uploading-files/"
-    
-  >파일 업로드
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/download-file/"
-    
-  >파일 다운로드
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/file-transfer/"
-    
-  >파일 전송 구성
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/presigned-urls/"
-    
-  >사전인증 URL
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/bucket-policies/"
-    
-  >버킷 정책
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col open"><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
-    href="/boto3/example/s3/access-permissions/"
+    href="/uml_tutorial/logical-model/"
     
-  >접근 권한
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/static-web-host/"
-    
-  >정적 웹호스트
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/configuring-buckets/"
-    
-  >버킷 CORS 구성
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/boto3/example/s3/privatelink/"
-    
-  >PrivateLink
-    </a>
-              
-            </li></ul>
-      </div>
-            </li></ul>
-      </div></li>
+  >논리적 모델
+    </a></li>
         
       </ul>
     </div>
@@ -636,10 +550,14 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
 <nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
     <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">페이지 목차</p><ul>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%eb%b2%84%ed%82%b7-%ec%a0%91%ea%b7%bc-%ea%b6%8c%ed%95%9c-%eb%aa%a9%eb%a1%9d-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0">버킷 접근 권한 목록 가져오기
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ed%81%b4%eb%9e%98%ec%8a%a4-%eb%aa%a8%eb%8d%b8">클래스 모델
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%ec%83%81%ec%86%8d">상속
         </a>
       </li></ul>
-      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><a class="hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50" href="https://github.com/iju707/blog/edit/master/content/boto3/example/s3/access-permissions.md" target="_blank" rel="noreferer">Github에서 편집하기 →</a>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400"><a class="hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50" href="https://github.com/iju707/blog/edit/master/content/uml_tutorial/logical-model.md" target="_blank" rel="noreferer">Github에서 편집하기 →</a>
         <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
           <span>맨위로 스크롤</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
@@ -655,48 +573,57 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
       <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
         <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
       <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
-        <a href="https://blog.oofbird.me/boto3/">Boto3</a>
-      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
-        <a href="https://blog.oofbird.me/boto3/example/">코드 예제</a>
-      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
-        <a href="https://blog.oofbird.me/boto3/example/s3/">Amazon S3 예제</a>
-      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">접근 권한</div>
+        <a href="https://blog.oofbird.me/uml_tutorial/">UML 튜토리얼</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">논리적 모델</div>
 </div>
 
         <div class="content">
-          <h1>Boto3를 활용한 접근권한 예제</h1>
+          <h1>논리적 모델</h1>
           <blockquote>
-<p><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html" target="_blank" rel="noopener">https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-access-permissions.html</a></p>
+<p><a href="https://sparxsystems.com/resources/tutorials/uml/logical-model.html" target="_blank" rel="noopener">https://sparxsystems.com/resources/tutorials/uml/logical-model.html</a></p>
 </blockquote>
-<p>이번 절에서 접근권한목록(ACL)을 사용해서 S3 버킷이나 객체에 대한 접근권한을 어떻게 관리하는지 알아보겠습니다.</p>
-<h2>버킷 접근 권한 목록 가져오기<span class="hx-absolute -hx-mt-20" id="버킷-접근-권한-목록-가져오기"></span>
-    <a href="#%eb%b2%84%ed%82%b7-%ec%a0%91%ea%b7%bc-%ea%b6%8c%ed%95%9c-%eb%aa%a9%eb%a1%9d-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>아래 예제는 S3 버킷의 현재 접근권한목록을 검색하는 것 입니다.</p>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 버킷의 ACL 검색하기</span>
-</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">get_bucket_acl</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
+<p>논리적 모델은 객체와 클래스가 디자인/분석 공간에 만들어질 정적 뷰를 표현합니다.
+일반적으로 도메인 모델은 비즈니스 객체나 엔티티에 대한 느슨하고 상위적 개념을 표현하고, 클래스 모델은 좀더 엄격하고 디자인에 집중되어있습니다.
+이부분은 클래스 모델에 다시 다루겠습니다.</p>
+<h2>클래스 모델<span class="hx-absolute -hx-mt-20" id="클래스-모델"></span>
+    <a href="#%ed%81%b4%eb%9e%98%ec%8a%a4-%eb%aa%a8%eb%8d%b8" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>클래스는 객체가 실행중일 때 만들어지는 패턴에 대한 상세를 표현하는 표준 UML 구조 입니다.
+클래스는 사양이며, 객체는 클래스의 인스턴스 입니다.
+클래스는 다른 클래스를 상속받기도 합니다. (부모의 모든 행동과 상태를 상속받고 자체적으로 새로운 기능을 추가힙니다)
+다른 클래스를 속성으로 가지기도 하고 다른 클래스에 책임을 위임하거나 추상 인터페이스를 구현합니다.</p>
+<p>클래스 모델은 객체지향 개발과 디자인의 핵심입니다.
+시스템의 지속된 상태와 행동 둘다 표현해줍니다.
+클래스는 상태(속성)를 캡슐화하고 그 상태를 조작하는 서비스(행동)을 제공합니다.
+좋은 객체지향 디자인은 클래스의 속성에 직접적인 접근을 제약하고 호출자를 대신하여 속성을 조작하는 서비스를 제공합니다.
+데이터를 숨기고 서비스를 노출하는 것은 데이터의 갱신이 한곳에서 이뤄지고 특별한 규칙을 따르게 만듭니다.
+큰 시스템에서 여러 곳에서 데이터의 요소에 접근할 수 있는 코드는 유지보수의 가중을 급격하게 증가시킵니다.</p>
+<p>클래스는 아래와 같이 표현됩니다.</p>
+<p>
+    <img src=".././Class1.gif" alt="Class1" loading="lazy" /></p>
+<p>클래스는 3개의 독립적인 영역을 가지고 있습니다.</p>
+<ul>
+<li>클래스 이름(과 적용된 스테레오타입)</li>
+<li>클래스 속성 영역 (내부적 데이터 요소)</li>
+<li>행동 - private와 public 둘다 포함</li>
+</ul>
+<p>속성과 메소드는 다음과 같이 표시됩니다.</p>
+<ul>
+<li>Private : 클래스 밖의 호출자에게 보이지 않는 것</li>
+<li>Protected : 클래스의 자식에게만 보이는 것</li>
+<li>Public : 모두에게 보이는 것</li>
+</ul>
+<h2>상속<span class="hx-absolute -hx-mt-20" id="상속"></span>
+    <a href="#%ec%83%81%ec%86%8d" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>클래스 상속은 아래와 같습니다.
+이 경우 추상클래스는 2개의 자식에 대한 부모이며, 각각 기본 클래스 기능을 상속받고 자신만의 행동으로 확장합니다.</p>
+<p>
+    <img src=".././Class2.gif" alt="Class2" loading="lazy" /></p>
+<p>클래스 모델은 관련된 행동과 상태의 패키지로 모이게 됩니다.
+아래의 다이어 그램에서 그 내용을 표현하고 있습니다.</p>
+<p>
+    <img src=".././Class3.gif" alt="Class3" loading="lazy" /></p>
 
         </div>
         
-    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">마지막 수정일자 <time datetime="2023-09-20T00:00:00.000Z">2023년 9월 20일</time></div><div>
+    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">마지막 수정일자 <time datetime="2024-06-08T01:00:00.000Z">2024년 6월 8일</time></div><div>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1537305666483956" crossorigin="anonymous"></script>
     <ins class="adsbygoogle"
      style="display:block"
@@ -712,14 +639,10 @@ import boto3 # 버킷의 ACL 검색하기 s3 = boto3.client(&#39;s3&#39;) result
 </div>
 
         <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a
-        href="/boto3/example/s3/bucket-policies/"
-        title="버킷 정책"
+        href="/uml_tutorial/dynamic-model/"
+        title="다이나믹 모델"
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
-      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>버킷 정책</a><a
-        href="/boto3/example/s3/static-web-host/"
-        title="정적 웹호스트"
-        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
-      >정적 웹호스트<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
+      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>다이나믹 모델</a></div>
         <script>
   
 
