@@ -2,6 +2,10 @@
 title: '[PostgreSQL] 재시작없이 설정불러오기 (reload configuration without restart)'
 date: 2023-09-27T00:20:35+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 개요

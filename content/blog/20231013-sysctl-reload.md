@@ -2,6 +2,10 @@
 title: '[Linux] 재부팅없이 sysctl 설정 다시읽기(reload)'
 date: 2023-10-13T23:39:00+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 개요

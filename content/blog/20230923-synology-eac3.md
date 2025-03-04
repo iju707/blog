@@ -2,6 +2,10 @@
 title: "[Synology] EAC3 코덱 재생하기"
 date: 2023-09-23T23:35:00+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 개요

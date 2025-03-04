@@ -2,6 +2,10 @@
 title: '[Git] Failed to find a valid digest in the "integrity" attribute for resource'
 date: 2023-10-12T04:01:00+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 현상

@@ -2,6 +2,10 @@
 title: "[Windows] Failover Cluster 생성실패 (로그온 실패)"
 date: 2023-09-21T00:27:33+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 문제점

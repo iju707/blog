@@ -2,6 +2,10 @@
 title: '[LogiOptions+] 실행안됨현상 해결'
 date: 2024-01-13T00:00:00+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 현상

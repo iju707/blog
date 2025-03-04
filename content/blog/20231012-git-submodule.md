@@ -2,6 +2,10 @@
 title: '[Git] Submodule이 있는 저장소 Clone 하기'
 date: 2023-10-12T03:22:19+09:00
 draft: false
+authors:
+  - name: iju707
+    link: https://github.com/iju707
+    image: https://github.com/iju707.png
 ---
 
 ## 개요

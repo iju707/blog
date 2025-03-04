@@ -69,3 +69,8 @@ params:
       repoId: "R_kgDOKUrL5A"
       category: "General"
       categoryId: "DIC_kwDOKUrL5M4CZlVJ"
+  blog:
+    list:
+      displayTags: true
+      sortBy: date
+      sortOrder: desc
