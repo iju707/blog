@@ -301,7 +301,9 @@
         <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">BLOG</h1>
         <div class="content"></div>
           <div class="hx-mb-10">
-            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/20250305-gitrefspec/">[Git] src refspec master does not match any 오류</a></h3><p class="hx-opacity-80 hx-mt-4 hx-leading-7">문제점 Git으로 Commit을 하고 Push할 때 아래와 같은 오류가 발생됩니다.
+            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="/blog/20250305-gitrefspec/">[Git] src refspec master does not match any 오류</a></h3>
+                <p class="hx-opacity-50 hx-text-sm hx-leading-7"><a class="hx-inline-block hx-mr-2">#git</a><a class="hx-inline-block hx-mr-2">#refspec</a></p>
+              <p class="hx-opacity-80 hx-mt-4 hx-leading-7">문제점 Git으로 Commit을 하고 Push할 때 아래와 같은 오류가 발생됩니다.
 error: src refspec master does not match any 수행했던 명령은 아래와 같습니다.
 &gt; git init &gt; git add -A &gt; git commit -m &#34;deploy&#34; &gt; git push -f https://github.com/iju707/blog.git master:gh-pages 원인 Push 할 대상으로 지정된 브랜치명이 잘못된 경우입니다. 브랜치의 경로를 git show-ref 명령으로 확인해보니 main으로 지정되어있었습니다.</p>
             <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
