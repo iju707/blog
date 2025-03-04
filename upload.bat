@@ -5,7 +5,7 @@ for /f "tokens=*" %%i in ('powershell -c "get-date -format \"yyyy-MM-dd HH:mm:ss
 )
 
 cd public
-git init
+git init -b master
 git config core.autocrlf false
 git add -A
 git commit -m "deploy %currentTime%"
