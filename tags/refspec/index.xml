@@ -1,0 +1,81 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOFBIRD – Refspec</title>
+    <link>https://blog.oofbird.me/tags/refspec/</link>
+    <description>Recent content in Refspec on OOFBIRD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Wed, 05 Mar 2025 00:41:00 +0900</lastBuildDate>
+    
+	  <atom:link href="https://blog.oofbird.me/tags/refspec/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>[Git] src refspec master does not match any 오류</title>
+      <link>https://blog.oofbird.me/blog/20250305-gitrefspec/</link>
+      <pubDate>Wed, 05 Mar 2025 00:41:00 +0900</pubDate>
+      
+      <guid>https://blog.oofbird.me/blog/20250305-gitrefspec/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;문제점&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;문제점&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%eb%ac%b8%ec%a0%9c%ec%a0%90&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Git으로 Commit을 하고 Push할 때 아래와 같은 오류가 발생됩니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;pre&gt;&lt;code&gt;error: src refspec master does not match any&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;수행했던 명령은 아래와 같습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; git init
+&amp;gt; git add -A
+&amp;gt; git commit -m &amp;#34;deploy&amp;#34;
+&amp;gt; git push -f https://github.com/iju707/blog.git master:gh-pages&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;원인&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;원인&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ec%9b%90%ec%9d%b8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Push 할 대상으로 지정된 브랜치명이 잘못된 경우입니다.
+브랜치의 경로를 &lt;code&gt;git show-ref&lt;/code&gt; 명령으로 확인해보니 main으로 지정되어있었습니다.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; git show-ref
+aa7fe6bee3ecde2877a05f6dc156763dab49a7fa refs/heads/main&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;해결방법&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;해결방법&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Push할 대상의 정보를 &lt;code&gt;master:gh-pages&lt;/code&gt;에서 &lt;code&gt;main:gh-pages&lt;/code&gt;로 변경합니다.&lt;/p&gt;
+&lt;p&gt;또는, Init을 할 때 대상 &lt;code&gt;git init -b master&lt;/code&gt; 명령으로 브랜치 명을 지정합니다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
