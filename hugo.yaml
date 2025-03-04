@@ -23,7 +23,7 @@ enableInlineShortcodes: true
 
 menu:
   main:
-    - name: 문서번역
+    - name: 가이드문서
       pageRef: /docs
       weight: 1
     - name: BLOG
